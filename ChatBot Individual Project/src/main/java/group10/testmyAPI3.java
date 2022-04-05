@@ -42,7 +42,11 @@ public class testmyAPI3 {
     Set<String> pollFields = new HashSet<>(Arrays.asList()); // Set<String> | A comma separated list of Poll fields to display.
     try {
            GenericTweetsTimelineResponse result = apiInstance.tweets().usersIdTweets(id, null, null, maxResults, exclude, null, startTime, endTime, expansions, tweetFields, userFields, mediaFields, placeFields, pollFields);
-            System.out.println(result);
+            //System.out.println(result.getData());
+            for(int i=0; i<result.getData().size();i++){
+                System.out.println(result.getData().get(i).getText());
+                break;
+            }
         //    String results2 = result.toString();
         //    String[] results3 = results2.split("text:");
         //    for(int i=0; i<results3.length;i++){
