@@ -395,6 +395,7 @@ public class ChatBot extends JFrame implements ActionListener {
         movieQuestion.add("length");
         movieQuestion.add("duration");
         movieQuestion.add("budget");
+        movieQuestion.add("summary");
 
         // Initializing the list of movies
         listOfMovies.add(r.getDeadpool2());
@@ -754,6 +755,8 @@ public class ChatBot extends JFrame implements ActionListener {
         // taking current age as the years of the period determined above
         int currentAge = difference.getYears();
 
+        //update dates to be even more current
+
         // converting Ryan Reynolds age to days, hours, minutes, and seconds
         int currentDays = currentAge * 365;
         int currentHours = currentAge * 8760;
@@ -959,8 +962,10 @@ public class ChatBot extends JFrame implements ActionListener {
     } else if (userInput.contains(movieQuestion.get(13))) {
       chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + budgetMap.get(movieTitleAsked) + "\n");
       return;
-    } else {
-
+    } else if(userInput.contains(movieQuestion.get(14))){
+      chatArea.append("Ryan Reynolds: "+"Here is a summary of "+movieTitleAsked+":\n"+WikipediaAPI.getSummaryOfMovie(movieTitleAsked));
+      
+    }else{
       return;
     }
 

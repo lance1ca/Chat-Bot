@@ -1,6 +1,5 @@
 package group10;
 
-import org.fastily.*;
 import org.fastily.jwiki.core.Wiki;
 
 

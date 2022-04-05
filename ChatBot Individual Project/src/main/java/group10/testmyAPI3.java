@@ -26,7 +26,7 @@ public class testmyAPI3 {
     apiInstance.setTwitterCredentials(credentials);
     
     
-    String id = "id"; // String | The ID of the User to list Tweets of
+    String id = "2893511188"; // String | The ID of the User to list Tweets of
    
     
     Integer maxResults = 5; // Integer | The maximum number of results
