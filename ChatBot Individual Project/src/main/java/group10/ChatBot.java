@@ -400,7 +400,7 @@ public class ChatBot extends JFrame implements ActionListener {
         // Initializing the list of movies
         listOfMovies.add(r.getDeadpool2());
         listOfMovies.add(r.getDeadpool());
-        
+
         listOfMovies.add(r.getFreeGuy());
         listOfMovies.add(r.getRIPD());
         listOfMovies.add(r.getGreenLantern());
@@ -457,6 +457,7 @@ public class ChatBot extends JFrame implements ActionListener {
         personalQuestion.add("previous marriage");
         personalQuestion.add("other awards");
         personalQuestion.add("old");
+        personalQuestion.add("tweets");
 
         // here we are initializing the personal question map
         fillInPersonalMap(personalQuestionMap);
@@ -527,13 +528,13 @@ public class ChatBot extends JFrame implements ActionListener {
         // Specify your translation requirements here:
         String fromLang = "es";
         String toLang = "en";
-        try{
-        //setting the user input to be the translated text from spanish to english
-        //and as lowercase
-        userInput = Translate.translate(fromLang, toLang, userInput).toLowerCase();
-        // System.out.println(userInput);
-        }catch(Exception g){
-        return;
+        try {
+          // setting the user input to be the translated text from spanish to english
+          // and as lowercase
+          userInput = Translate.translate(fromLang, toLang, userInput).toLowerCase();
+          // System.out.println(userInput);
+        } catch (Exception g) {
+          return;
         }
 
         // Here we then use our second toolkit API to tokenize our user input after it
@@ -755,7 +756,7 @@ public class ChatBot extends JFrame implements ActionListener {
         // taking current age as the years of the period determined above
         int currentAge = difference.getYears();
 
-        //update dates to be even more current
+        // update dates to be even more current
 
         // converting Ryan Reynolds age to days, hours, minutes, and seconds
         int currentDays = currentAge * 365;
@@ -769,7 +770,7 @@ public class ChatBot extends JFrame implements ActionListener {
             + " Haha, or just because I am a robot, more specifically I am " + currentDays + " days, "
             + currentHours + " hours, " + currentMinutes + " minutes, and " + currentSeconds + " seconds " + "old!");
 
-      } else {
+      }  else {
         return;
       }
     }
@@ -962,10 +963,11 @@ public class ChatBot extends JFrame implements ActionListener {
     } else if (userInput.contains(movieQuestion.get(13))) {
       chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + budgetMap.get(movieTitleAsked) + "\n");
       return;
-    } else if(userInput.contains(movieQuestion.get(14))){
-      chatArea.append("Ryan Reynolds: "+"Here is a summary of "+movieTitleAsked+":\n"+WikipediaAPI.getSummaryOfMovie(movieTitleAsked));
-      
-    }else{
+    } else if (userInput.contains(movieQuestion.get(14))) {
+      chatArea.append("Ryan Reynolds: " + "Here is a summary of " + movieTitleAsked + ":\n"
+          + WikipediaAPI.getSummaryOfMovie(movieTitleAsked));
+
+    } else {
       return;
     }
 
@@ -978,6 +980,7 @@ public class ChatBot extends JFrame implements ActionListener {
   // that gets the key of the question asked and prints the value of that key
   // value pair
   public static void personalChatFunction(String userInput, String personalQuestionAsked) {
+
     // prints the value in the map corresponding the the key = personalQuestionAsked
     chatArea.append("Ryan Reynolds: " + personalQuestionMap.get(personalQuestionAsked) + "\n");
     askAQuestionResponse(); // asks a question back to the user 1/6 of the time
