@@ -467,6 +467,8 @@ public class ChatBot extends JFrame implements ActionListener {
         personalQuestion.add("other awards");
         personalQuestion.add("old");
         personalQuestion.add("tweets");
+        personalQuestion.add("following");
+        personalQuestion.add("followers");
 
         // here we are initializing the personal question map
         fillInPersonalMap(personalQuestionMap);
@@ -701,7 +703,7 @@ public class ChatBot extends JFrame implements ActionListener {
 
       } else {
 
-        return;
+        
       }
 
     }
@@ -788,9 +790,16 @@ public class ChatBot extends JFrame implements ActionListener {
             + currentHours + " hours, " + currentMinutes + " minutes, and " + currentSeconds + " seconds " + "old!");
 
       } else if(personalQuestion.get(i)=="tweets"){
-
-      } else {
-        return;
+        //this is dealt with in the actual personal chat function in order to provide the user more functionality to provide a range
+        //for a number of dates to get tweets from
+        
+      } else if(personalQuestion.get(i) == "following"){
+        map.put(personalQuestion.get(i).toLowerCase(), "Some of the people I am following are...\n"+TwitterAPI.getSampleOfCurrentFollowing());
+      
+      }else if(personalQuestion.get(i) == "followers"){
+        map.put(personalQuestion.get(i).toLowerCase(), "Some of my followers are...\n"+TwitterAPI.getSampleOfCurrentFollowers());
+      }else {
+       
       }
     }
   }
@@ -823,7 +832,7 @@ public class ChatBot extends JFrame implements ActionListener {
 
       } else {
 
-        return;
+        
       }
 
     }

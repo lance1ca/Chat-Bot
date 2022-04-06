@@ -15,18 +15,77 @@ import java.time.OffsetDateTime;
 
 
 public class TwitterAPI {
+  public static TwitterCredentialsBearer credentials = new TwitterCredentialsBearer(System.getenv("TWITTER_BEARER_TOKEN"));
+  public static TwitterApi apiInstance = new TwitterApi();
+  public static String id = System.getenv("TWITTER_USER_ID"); // String | The ID of the User to list Tweets of
+  
+
+  //-------------------------------------------------------------------------------------------------------------------------------------
+  public static String getSampleOfCurrentFollowing(){
+
+    apiInstance.setTwitterCredentials(credentials);
+    
+    String currentSampleFollowing="";
+    Integer maxResults = 56; // Integer | The maximum number of results
+   
+    try {
+           GenericMultipleUsersLookupResponse result = apiInstance.users().usersIdFollowers(id, maxResults, null);
+           for(int i=0; i<result.getData().size();i++){
+                    
+            currentSampleFollowing += result.getData().get(i).getName()+ "\n";
+        }
+           
+
+    } catch (ApiException e) {
+      System.err.println("Exception when calling UsersApi#usersIdFollowers");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+    return currentSampleFollowing;
+  }
+  
+
+
+  //-------------------------------------------------------------------------------------------------------------------------------------
+  public static String getSampleOfCurrentFollowers(){
+    apiInstance.setTwitterCredentials(credentials);
+    
+    String currentSampleFollowers="";
+    Integer maxResults = 56; // Integer | The maximum number of results
+    
+    try {
+           GenericMultipleUsersLookupResponse result = apiInstance.users().usersIdFollowers(id, maxResults, null);
+           for(int i=0; i<result.getData().size();i++){
+                    
+            currentSampleFollowers += result.getData().get(i).getName()+ "\n";
+        }
+    } catch (ApiException e) {
+      System.err.println("Exception when calling UsersApi#usersIdFollowers");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+    return currentSampleFollowers;
+  }
+
+
+
+
+
+
+
+
+
+
+
     
       public static String getTweetsInRange(int days){
         String tweetsInTimeRange ="";
-        TwitterCredentialsBearer credentials = new TwitterCredentialsBearer(System.getenv("TWITTER_BEARER_TOKEN"));
-    
-        TwitterApi apiInstance = new TwitterApi();
         apiInstance.setTwitterCredentials(credentials);
-        
-        
-        String id = System.getenv("TWITTER_USER_ID"); // String | The ID of the User to list Tweets of
-       
-        
+
         Integer maxResults = 100; // Integer | The maximum number of results
         Set<String> exclude = new HashSet<>(Arrays.asList()); // Set<String> | The set of entities to exclude (e.g. 'replies' or 'retweets')
         
@@ -75,5 +134,7 @@ public class TwitterAPI {
     
         
       }
+
+
     
 }
