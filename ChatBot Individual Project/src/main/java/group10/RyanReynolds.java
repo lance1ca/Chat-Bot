@@ -75,7 +75,7 @@ public class RyanReynolds {
                     "Stefan Kapicic", "Randal Reeder", "Nikolai Witschl", "Thayr Harris", "Rob Delaney", "Lewis Tan"));
     ArrayList<String> deadpool2Awards = new ArrayList<>(
             Arrays.asList("Golden Schmoes", "Golden Trailer", "Aurora Award"));
-    private Movie deadpool2 = new Movie(7.7, "Deadpool 2 (film)", 2018, "R", deadpool2Cast, "David Leitch",
+    private Movie deadpool2 = new Movie(7.7, "Deadpool 2", 2018, "R", deadpool2Cast, "David Leitch",
             "Action and Comedy", deadpool2Awards, "785,000,000", "Vancouver", "N/A", "2 hours", "110,000,000");
 
     // getter for deadpool 2 movie

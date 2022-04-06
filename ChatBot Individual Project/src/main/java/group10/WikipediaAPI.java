@@ -10,7 +10,7 @@ public class WikipediaAPI {
         Wiki wiki = new Wiki.Builder().build();
         String inputSummary ="";
         if(wiki.exists(input) == false){
-            return "Sorry, I could not find the Wikipedia page you are looking for as it does not exist, please rephrase your text and try again!";
+            return "Sorry, I could not find the Wikipedia page you are looking for as it does not exist. Please rephrase your text and try again, or ask me about something else!";
         }else
         inputSummary = wiki.getTextExtract(input);
         return inputSummary;

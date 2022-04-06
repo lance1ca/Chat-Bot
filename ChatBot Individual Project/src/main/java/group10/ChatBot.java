@@ -407,7 +407,6 @@ public class ChatBot extends JFrame implements ActionListener {
         // Initializing the list of movies
         listOfMovies.add(r.getDeadpool2());
         listOfMovies.add(r.getDeadpool());
-
         listOfMovies.add(r.getFreeGuy());
         listOfMovies.add(r.getRIPD());
         listOfMovies.add(r.getGreenLantern());
