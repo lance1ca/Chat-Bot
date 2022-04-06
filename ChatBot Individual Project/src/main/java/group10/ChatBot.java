@@ -95,6 +95,10 @@ public class ChatBot extends JFrame implements ActionListener {
   static HashMap<String, String> durationMap = new HashMap<String, String>();
   // Initializing the budget map
   static HashMap<String, String> budgetMap = new HashMap<String, String>();
+  //Initializing the wikipedia movie map
+  static HashMap<String,String> wikipediaMovieMap = new HashMap<String,String>();
+  //Initializing the wikipedia business map
+  static HashMap<String,String> wikipediaBusinessMap = new HashMap<String,String>();
 
   // creating a public and static JFrame frame
   public static JFrame frame;
@@ -438,6 +442,8 @@ public class ChatBot extends JFrame implements ActionListener {
         fillInMovieMap(durationMap, "duration");
         // Initializing the budget map
         fillInMovieMap(budgetMap, "budget");
+        //initializing the wikipedia movie map
+        fillInMovieMap(wikipediaMovieMap,"summary");
 
         // ----------------------------------------------------------------------------------------------------------------------------
 
@@ -471,6 +477,9 @@ public class ChatBot extends JFrame implements ActionListener {
         businessQuestion.add("year");
         businessQuestion.add("location");
         businessQuestion.add("position");
+        businessQuestion.add("summary");
+        businessQuestion.add("about");
+        businessQuestion.add("explain");
 
         // Initializing the list of business
         listOfBusiness.add(r.getMintMoblie());
@@ -487,6 +496,8 @@ public class ChatBot extends JFrame implements ActionListener {
         fillInBusinessMap(businessLocationMap, "location");
         // Initializing the businessPosition map
         fillInBusinessMap(businessPositionMap, "position");
+         //initializing the wikipedia business map
+         fillInMovieMap(wikipediaBusinessMap,"summary");
 
         // ----------------------------------------------------------------------------------------------------------------------------
 
@@ -684,6 +695,9 @@ public class ChatBot extends JFrame implements ActionListener {
         map.put(listOfMovies.get(i).getTitle().toLowerCase(),
             " had a budget of " + listOfMovies.get(i).getBudgetOfMovie());
 
+      }else if(value == "summary"){
+        map.put(listOfMovies.get(i).getTitle().toLowerCase(),WikipediaAPI.getSummaryOf(listOfMovies.get(i).getTitle()));
+
       } else {
 
         return;
@@ -772,7 +786,9 @@ public class ChatBot extends JFrame implements ActionListener {
             + " Haha, or just because I am a robot, more specifically I am " + currentDays + " days, "
             + currentHours + " hours, " + currentMinutes + " minutes, and " + currentSeconds + " seconds " + "old!");
 
-      }  else {
+      } else if(personalQuestion.get(i)=="tweets"){
+
+      } else {
         return;
       }
     }
@@ -801,6 +817,9 @@ public class ChatBot extends JFrame implements ActionListener {
         map.put(listOfBusiness.get(i).getbusinessName().toLowerCase(),
             " The position is " + listOfBusiness.get(i).getbusinessPosition().toLowerCase() + " of "
                 + listOfBusiness.get(i).getbusinessName());
+      }else if(value == "summary"){
+        map.put(listOfBusiness.get(i).getbusinessName().toLowerCase(),WikipediaAPI.getSummaryOf(listOfBusiness.get(i).getbusinessName()));
+
       } else {
 
         return;
@@ -967,9 +986,10 @@ public class ChatBot extends JFrame implements ActionListener {
       return;
     } else if (userInput.contains(movieQuestion.get(14)) ||userInput.contains(movieQuestion.get(15)) ||userInput.contains(movieQuestion.get(16))) {
       chatArea.append("Ryan Reynolds: " + "Here is a summary of " + movieTitleAsked + ":\n"
-          + WikipediaAPI.getSummaryOfMovie(movieTitleAsked));
+          + wikipediaMovieMap.get(movieTitleAsked));
 
     } else {
+      defaultResponse();
       return;
     }
 
@@ -1075,8 +1095,12 @@ public class ChatBot extends JFrame implements ActionListener {
     } else if (userInput.contains(businessQuestion.get(2))) {
       chatArea.append("Ryan Reynolds: " + businessPositionMap.get(businessNameAsked) + "\n");
       return;
-    } else {
+    } else if (userInput.contains(businessQuestion.get(3)) ||userInput.contains(businessQuestion.get(4)) ||userInput.contains(businessQuestion.get(5))) {
+      chatArea.append("Ryan Reynolds: " + "Here is a summary of " + businessNameAsked + ":\n"
+          + wikipediaBusinessMap.get(businessNameAsked));
 
+    }else {
+      defaultResponse();
       return;
     }
 
