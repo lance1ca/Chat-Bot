@@ -377,6 +377,7 @@ public class ChatBot extends JFrame implements ActionListener {
         // normal
       } else {
 
+        if (startUp == true) {
         // initializing the greeting repsonse list
         greetingResponses.add("hi");
         greetingResponses.add("hello");
@@ -505,7 +506,7 @@ public class ChatBot extends JFrame implements ActionListener {
         // if so, we display the start text to the user, and set the boolean to be false
         // to it never does this again until it is re run from the start
         // otherwise, we don't do anything and proceed as normal.
-        if (startUp == true) {
+        
           // a cool feature saying the chatbot is booting up for a delay of 2 seconds
           chatArea.setText("Ryan Reynolds Chat bot booting up...\n");
           try {
@@ -517,7 +518,7 @@ public class ChatBot extends JFrame implements ActionListener {
           chatArea.setText("Ryan Reynolds: " +
               "Hello! Nice to meet you! I am Ryan Reynolds, but in chat bot form...\nAsk me a question about myself or my movies!\n");
           startUp = false; // indicating we have started the program and there is no need to display this
-                           // anymore
+                           // anymore or do the mapping initializations
         }
 
         // initializing the askAQuestion to false to start
