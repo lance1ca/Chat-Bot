@@ -32,7 +32,7 @@ public class TwitterAPI {
            GenericMultipleUsersLookupResponse result = apiInstance.users().usersIdFollowers(id, maxResults, null);
            for(int i=0; i<result.getData().size();i++){
                     
-            currentSampleFollowing += result.getData().get(i).getName()+ "\n";
+            currentSampleFollowing += result.getData().get(i).getName()+ ", ";
         }
            
 
@@ -59,7 +59,7 @@ public class TwitterAPI {
            GenericMultipleUsersLookupResponse result = apiInstance.users().usersIdFollowers(id, maxResults, null);
            for(int i=0; i<result.getData().size();i++){
                     
-            currentSampleFollowers += result.getData().get(i).getName()+ "\n";
+            currentSampleFollowers += result.getData().get(i).getName()+ ", ";
         }
     } catch (ApiException e) {
       System.err.println("Exception when calling UsersApi#usersIdFollowers");
