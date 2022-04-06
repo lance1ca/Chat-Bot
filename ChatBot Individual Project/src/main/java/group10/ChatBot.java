@@ -469,6 +469,8 @@ public class ChatBot extends JFrame implements ActionListener {
         personalQuestion.add("tweets");
         personalQuestion.add("following");
         personalQuestion.add("followers");
+        personalQuestion.add("liked");
+        personalQuestion.add("mentioned");
 
         // here we are initializing the personal question map
         fillInPersonalMap(personalQuestionMap);
@@ -798,6 +800,13 @@ public class ChatBot extends JFrame implements ActionListener {
       
       }else if(personalQuestion.get(i) == "followers"){
         map.put(personalQuestion.get(i).toLowerCase(), "Some of my followers are...\n"+TwitterAPI.getSampleOfCurrentFollowers());
+
+      }else if(personalQuestion.get(i) == "liked"){
+        map.put(personalQuestion.get(i).toLowerCase(), "Some of the tweets I have liked are...\n"+TwitterAPI.getLikedTweets());
+
+      }else if(personalQuestion.get(i) == "mentioned"){
+        map.put(personalQuestion.get(i).toLowerCase(), "Some of the tweets I am mentioned on are...\n"+TwitterAPI.getTweetsMentioned());
+
       }else {
        
       }
