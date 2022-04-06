@@ -1,6 +1,6 @@
 package group10;
 
-// Import classes:
+
 
 import com.twitter.clientlib.ApiException;
 import com.twitter.clientlib.model.*;
@@ -10,10 +10,8 @@ import java.util.Set;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
+
 
 
 public class TwitterAPI {
@@ -31,12 +29,8 @@ public class TwitterAPI {
         
         Integer maxResults = 100; // Integer | The maximum number of results
         Set<String> exclude = new HashSet<>(Arrays.asList()); // Set<String> | The set of entities to exclude (e.g. 'replies' or 'retweets')
-        // String paginationToken = "paginationToken_example"; // String | This parameter is used to get the next 'page' of results.
         
         //Getting the current date 
-        // DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
-        // LocalDateTime now = LocalDateTime.now();
-        // String dateUnformatted = dtf.format(now);
 
         LocalDate todaysDate = LocalDate.now(); 
         

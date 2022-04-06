@@ -396,6 +396,8 @@ public class ChatBot extends JFrame implements ActionListener {
         movieQuestion.add("duration");
         movieQuestion.add("budget");
         movieQuestion.add("summary");
+        movieQuestion.add("about");
+        movieQuestion.add("explain");
 
         // Initializing the list of movies
         listOfMovies.add(r.getDeadpool2());
@@ -963,7 +965,7 @@ public class ChatBot extends JFrame implements ActionListener {
     } else if (userInput.contains(movieQuestion.get(13))) {
       chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + budgetMap.get(movieTitleAsked) + "\n");
       return;
-    } else if (userInput.contains(movieQuestion.get(14))) {
+    } else if (userInput.contains(movieQuestion.get(14)) ||userInput.contains(movieQuestion.get(15)) ||userInput.contains(movieQuestion.get(16))) {
       chatArea.append("Ryan Reynolds: " + "Here is a summary of " + movieTitleAsked + ":\n"
           + WikipediaAPI.getSummaryOfMovie(movieTitleAsked));
 
@@ -993,9 +995,10 @@ public class ChatBot extends JFrame implements ActionListener {
         String tweetsInRange = TwitterAPI.getTweetsInRange(days);
         chatArea.append("Ryan Reynolds: My most recent tweets in the past " + days + " days are... \n" + tweetsInRange);
         return;
-      }
+      }else{
     // prints the value in the map corresponding the the key = personalQuestionAsked
     chatArea.append("Ryan Reynolds: " + personalQuestionMap.get(personalQuestionAsked) + "\n");
+      }
     askAQuestionResponse(); // asks a question back to the user 1/6 of the time
   }
 
