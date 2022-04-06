@@ -80,6 +80,7 @@ public class TwitterAPI {
 
 
 
+//-------------------------------------------------------------------------------------------------------------------------------------
 
     
       public static String getTweetsInRange(int days){
@@ -135,6 +136,92 @@ public class TwitterAPI {
         
       }
 
+      //-------------------------------------------------------------------------------------------------------------------------------------
+
+      public static String getTweetsMentioned(){
+        apiInstance.setTwitterCredentials(credentials);
+
+
+
+        //Getting the current date 
+
+        LocalDate todaysDate = LocalDate.now(); 
+        
+        //creating the formatted string with todays date
+        String currentDate = todaysDate+"T00:00:00.000Z";
+
+        //Getting the date a certain number of days from the current date as specified in user input
+       // DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+    
+     LocalDate prevDate = todaysDate.plusDays(-10);
+     String previousDate = prevDate+"T00:00:00.000Z";
+     //System.out.println(currentDate +" "+previousDate);
+
+    // Set the params values
+    String tweetsMentionedIn="";
+    
+    //String sinceId = "791775337160081409"; // String | The minimum Tweet ID to be included in the result set. This parameter takes precedence over start_time if both are specified.
+    //String untilId = "1346889436626259968"; // String | The maximum Tweet ID to be included in the result set. This parameter takes precedence over end_time if both are specified.
+    Integer maxResults = 56; // Integer | The maximum number of results
+    //String paginationToken = "paginationToken_example"; // String | This parameter is used to get the next 'page' of results.
+    OffsetDateTime startTime = OffsetDateTime.parse(previousDate); // OffsetDateTime | YYYY-MM-DDTHH:mm:ssZ. The earliest UTC timestamp from which the Tweets will be provided. The since_id parameter takes precedence if it is also specified.
+    OffsetDateTime endTime = OffsetDateTime.parse(currentDate); // OffsetDateTime | YYYY-MM-DDTHH:mm:ssZ. The latest UTC timestamp to which the Tweets will be provided. The until_id parameter takes precedence if it is also specified.
+    Set<String> expansions = new HashSet<>(Arrays.asList()); // Set<String> | A comma separated list of fields to expand.
+    Set<String> tweetFields = new HashSet<>(Arrays.asList()); // Set<String> | A comma separated list of Tweet fields to display.
+    Set<String> userFields = new HashSet<>(Arrays.asList()); // Set<String> | A comma separated list of User fields to display.
+    Set<String> mediaFields = new HashSet<>(Arrays.asList()); // Set<String> | A comma separated list of Media fields to display.
+    Set<String> placeFields = new HashSet<>(Arrays.asList()); // Set<String> | A comma separated list of Place fields to display.
+    Set<String> pollFields = new HashSet<>(Arrays.asList()); // Set<String> | A comma separated list of Poll fields to display.
+    try {
+           GenericTweetsTimelineResponse result = apiInstance.tweets().usersIdMentions(id, null, null, maxResults, null, startTime, endTime, expansions, tweetFields, userFields, mediaFields, placeFields, pollFields);
+           for(int i=0; i<result.getData().size();i++){
+                    
+            tweetsMentionedIn += result.getData().get(i).getText() + "\n";
+        } 
+
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TweetsApi#usersIdMentions");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+    return tweetsMentionedIn;
+  }
+
+
+  //-------------------------------------------------------------------------------------------------------------------------------------
+
+  public static String getLikedTweets(){
+    apiInstance.setTwitterCredentials(credentials);
+    String likedTweets ="";
+    Integer maxResults = 56; // Integer | The maximum number of results
+    //String paginationToken = "paginationToken_example"; // String | This parameter is used to get the next 'page' of results.
+    Set<String> expansions = new HashSet<>(Arrays.asList()); // Set<String> | A comma separated list of fields to expand.
+    Set<String> tweetFields = new HashSet<>(Arrays.asList()); // Set<String> | A comma separated list of Tweet fields to display.
+    Set<String> userFields = new HashSet<>(Arrays.asList()); // Set<String> | A comma separated list of User fields to display.
+    Set<String> mediaFields = new HashSet<>(Arrays.asList()); // Set<String> | A comma separated list of Media fields to display.
+    Set<String> placeFields = new HashSet<>(Arrays.asList()); // Set<String> | A comma separated list of Place fields to display.
+    Set<String> pollFields = new HashSet<>(Arrays.asList()); // Set<String> | A comma separated list of Poll fields to display.
+    try {
+           UsersIdLikedTweetsResponse result = apiInstance.tweets().usersIdLikedTweets(id, maxResults, null, expansions, tweetFields, userFields, mediaFields, placeFields, pollFields);
+           for(int i=0; i<result.getData().size();i++){
+                    
+            likedTweets += result.getData().get(i).getText() + "\n";
+        } 
+
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TweetsApi#usersIdLikedTweets");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+    return likedTweets;
+  }
+  }
+
+      
 
     
-}
+
