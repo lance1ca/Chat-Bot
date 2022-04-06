@@ -980,7 +980,20 @@ public class ChatBot extends JFrame implements ActionListener {
   // that gets the key of the question asked and prints the value of that key
   // value pair
   public static void personalChatFunction(String userInput, String personalQuestionAsked) {
+      if(personalQuestionAsked == "tweets"){
 
+        int days=0;
+
+        for(int i=0; i<Tokenizer.tokens.length;i++){
+        
+        if(Tokenizer.tokens[i].contains("1") || Tokenizer.tokens[i].contains("2")|| Tokenizer.tokens[i].contains("3")|| Tokenizer.tokens[i].contains("4")|| Tokenizer.tokens[i].contains("5")|| Tokenizer.tokens[i].contains("6")|| Tokenizer.tokens[i].contains("7")|| Tokenizer.tokens[i].contains("8")|| Tokenizer.tokens[i].contains("9")){
+            days = Integer.parseInt(Tokenizer.tokens[i]);
+        }
+        }
+        String tweetsInRange = TwitterAPI.getTweetsInRange(days);
+        chatArea.append("Ryan Reynolds: My most recent tweets in the past " + days + " days are... \n" + tweetsInRange);
+        return;
+      }
     // prints the value in the map corresponding the the key = personalQuestionAsked
     chatArea.append("Ryan Reynolds: " + personalQuestionMap.get(personalQuestionAsked) + "\n");
     askAQuestionResponse(); // asks a question back to the user 1/6 of the time

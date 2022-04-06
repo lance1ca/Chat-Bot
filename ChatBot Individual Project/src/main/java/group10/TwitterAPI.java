@@ -29,7 +29,7 @@ public class TwitterAPI {
         String id = System.getenv("TWITTER_USER_ID"); // String | The ID of the User to list Tweets of
        
         
-        Integer maxResults = 1000000; // Integer | The maximum number of results
+        Integer maxResults = 100; // Integer | The maximum number of results
         Set<String> exclude = new HashSet<>(Arrays.asList()); // Set<String> | The set of entities to exclude (e.g. 'replies' or 'retweets')
         // String paginationToken = "paginationToken_example"; // String | This parameter is used to get the next 'page' of results.
         
@@ -65,7 +65,7 @@ public class TwitterAPI {
                GenericTweetsTimelineResponse result = apiInstance.tweets().usersIdTweets(id, null, null, maxResults, exclude, null, startTime, endTime, expansions, tweetFields, userFields, mediaFields, placeFields, pollFields);
                 
                 for(int i=0; i<result.getData().size();i++){
-                    //System.out.println(result.getData().get(i).getText());
+                    
                     tweetsInTimeRange += result.getData().get(i).getText() + "\n";
                 }
                 
