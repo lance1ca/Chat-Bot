@@ -497,7 +497,7 @@ public class ChatBot extends JFrame implements ActionListener {
         // Initializing the businessPosition map
         fillInBusinessMap(businessPositionMap, "position");
          //initializing the wikipedia business map
-         fillInMovieMap(wikipediaBusinessMap,"summary");
+        fillInBusinessMap(wikipediaBusinessMap,"summary");
 
         // ----------------------------------------------------------------------------------------------------------------------------
 
@@ -1135,11 +1135,11 @@ public class ChatBot extends JFrame implements ActionListener {
   // unable to determine how to respond
   public static void defaultResponse() {
     // If all else fails and the chat bot does not not how to respond, we have these
-    // 5 statements set as
+    // 6 statements set as
     // the chat bot's default responses to any questions it does not know
 
     // random value to select a response
-    int selector = (int) (Math.random() * 5);
+    int selector = (int) (Math.random() * 6);
 
     switch (selector) {
       // case statements: each is a unique response when the question is not
@@ -1160,6 +1160,9 @@ public class ChatBot extends JFrame implements ActionListener {
       case 4:
         chatArea.append("Ryan Reynolds: " + "That was a confusing question! Can you ask me again?" + "\n");
         break;
+      case 5:
+      chatArea.append("Ryan Reynolds: I am not sure how to respond to that, so I will just tell you about myself...\n" + WikipediaAPI.getSummaryOf("Ryan Renyolds"));
+      break;
       default:
     }
   }
