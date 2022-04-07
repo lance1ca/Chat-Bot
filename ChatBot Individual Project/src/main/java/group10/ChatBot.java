@@ -2,7 +2,7 @@ package group10; //importing group10 package for maven project
 
 //FINAL A#3 CODE
 // GROUP 10 COSC 310 Main ChatBot Class ** Finished ** 
-// **A#3 FINISHED VERSION**
+// 
 /*
 By:
 LANCE ROGAN, STUDENT #62708938 BLAKE ABLITT, STUDENT #37099595 BEN VAN BERGEYK, STUDENT #95307054
@@ -1004,7 +1004,7 @@ public class ChatBot extends JFrame implements ActionListener {
       return;
     } else if (userInput.contains(movieQuestion.get(14)) ||userInput.contains(movieQuestion.get(15)) ||userInput.contains(movieQuestion.get(16))) {
       chatArea.append("Ryan Reynolds: " + "Here is a summary of " + movieTitleAsked + ":\n"
-          + wikipediaMovieMap.get(movieTitleAsked));
+          + wikipediaMovieMap.get(movieTitleAsked)+"\n");
 
     } else {
       defaultResponse();
@@ -1031,7 +1031,7 @@ public class ChatBot extends JFrame implements ActionListener {
         }
         }
         String tweetsInRange = TwitterAPI.getTweetsInRange(days);
-        chatArea.append("Ryan Reynolds: My most recent tweets in the past " + days + " days are... \n" + tweetsInRange);
+        chatArea.append("Ryan Reynolds: My most recent tweets in the past " + days + " days are... \n" + tweetsInRange+"\n");
         return;
       }else{
     // prints the value in the map corresponding the the key = personalQuestionAsked

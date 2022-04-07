@@ -60,7 +60,7 @@ public class RyanReynolds {
             "Critics Choice Award", "Artios Award", "DFCS Award", "Dragon Award", "Empire Award", "Golden Schmoes",
             "Golden Trailer", "HFCS Award", "IGN People's Choice Award", "MTV Movie Award", "OFTA Film Award",
             "Maxwell Weinberg Award", "Teen Choice Award"));
-    private Movie deadpool = new Movie(8, "Deadpool (film)", 2016, "R", deadpoolCast, "Tim Miller", "Action and Comedy",
+    private Movie deadpool = new Movie(8, "Deadpool", 2016, "R", deadpoolCast, "Tim Miller", "Action and Comedy",
             deadpoolAwards, "783,100,000", "Vancouver", "48 days", "1hr 48m", "58,000,000");
 
     // getter for deadpool movie
@@ -118,7 +118,7 @@ public class RyanReynolds {
                     "Jon Tenney", "Leanne Cochran", "Temuera Morrison", "Jeff Wolfe", "Lena Clark", "Jenna Craig"));
     ArrayList<String> greenLanternAwards = new ArrayList<>(
             Arrays.asList("ASCAP Award", "Golden Schmoes", "HPA Awards"));
-    private Movie greenLantern = new Movie(5.5, "Green Lantern (film)", 2011, "PG-13", greenLanternCast, "Martin Campbell",
+    private Movie greenLantern = new Movie(5.5, "Green Lantern", 2011, "PG-13", greenLanternCast, "Martin Campbell",
             "Action and Sci-Fi", greenLanternAwards, "219,900,000", "Los Angeles", "Approximately 6 months", "2hr 3m",
             "200,000,000");
 
@@ -135,7 +135,7 @@ public class RyanReynolds {
     ArrayList<String> buriedAwards = new ArrayList<>(Arrays.asList("ASECAN Award", "Bronze Frog", "CEC Award",
             "Critics Award", "Chainsaw Award", "Prix Nouveau Genre", "Gaudi Award", "Goya", "Jose Maria Forque Award",
             "NBR Award", "Georges Award", "Sant Jordi", "Grand Prize of European Fantasy Film in Gold"));
-    private Movie buried = new Movie(7.0, "Buried (film)", 2010, "R", buriedCast, "Rodrigo Cortes",
+    private Movie buried = new Movie(7.0, "Buried", 2010, "R", buriedCast, "Rodrigo Cortes",
             "Drama, Mystery, and Thriller", buriedAwards, "21,300,000", "Barcelona", "16 days", "1hr 35m", "2,000,000");
 
     // getter for buried movie
@@ -149,7 +149,7 @@ public class RyanReynolds {
             "Yuri Kolokolnikov", "Kim Kold", "Lidia Franco", "James Murray", "Lukhanyo Bele", "George Kareman",
             "James Carroll Jordan", "Ron Funches", "Daniel Adegboyega"));
     ArrayList<String> sixUndergroundAwards = new ArrayList<>(Arrays.asList("Taurus World Stunt Award"));
-    private Movie sixUnderground = new Movie(6.1, "6 Underground (film)", 2019, "R", sixUndergroundCast, "Michael Bay",
+    private Movie sixUnderground = new Movie(6.1, "6 Underground", 2019, "R", sixUndergroundCast, "Michael Bay",
             "Action and Thriller", sixUndergroundAwards, "N/A", "Abu Dhabi", "30 days", "2hr 8m", "150,000,000");
 
     // getter for 6 Underground movie
@@ -163,7 +163,7 @@ public class RyanReynolds {
             "Sebastien Large", "Guy Nardulli", "Andrew Hunter", "George Tsai", "Rawson Marshall Thurber", "Robert Mata",
             "Anthony Belevtsov", "Daniel Bernhardt", "Yosef Podolski"));
     ArrayList<String> redNoticeAwards = new ArrayList<>(Arrays.asList("N/A"));
-    private Movie redNotice = new Movie(6.3, "Red Notice (film)", 2021, "PG-13", redNoticeCast, "Rawson Marshall Thurber",
+    private Movie redNotice = new Movie(6.3, "Red Notice", 2021, "PG-13", redNoticeCast, "Rawson Marshall Thurber",
             "Action, Comedy, and Thriller", redNoticeAwards, "2,000,000", "Atlanta", "N/A", "1hr 57m", "200,000,000");
 
     // getter for red notice movie
@@ -221,7 +221,7 @@ public class RyanReynolds {
             "	Lee Wesley", "Gregg Edelman", "Phyllis Kay"));
     ArrayList<String> theProposalAwards = new ArrayList<>(Arrays.asList("BMI Film Music Award", "People's Choice Award",
             "Rembrandt Award", "Teen Choice Award", "WIN Award"));
-    private Movie theProposal = new Movie(6.7, "The Proposal (2009 film)", 2009, "PG-13", theProposalCast, "Anne Fletcher",
+    private Movie theProposal = new Movie(6.7, "The Proposal", 2009, "PG-13", theProposalCast, "Anne Fletcher",
             "Comedy, Drama, Romance", theProposalAwards, "317,400,000", "Sitka, Alaska", "2 months", "1hr 48m",
             "40,000,000");
 
