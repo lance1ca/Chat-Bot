@@ -753,17 +753,17 @@ public class ChatBot extends JFrame implements ActionListener {
         map.put(personalQuestion.get(i).toLowerCase(), "My social media handle is " + r.getsocialMediaHandle());
 
       } else if (personalQuestion.get(i) == "twitter followers") {
-        map.put(personalQuestion.get(i).toLowerCase(), "I have " + r.gettwitterFollowers() + " followers on Twitter");
+        map.put(personalQuestion.get(i).toLowerCase(), "I have approximately" + r.gettwitterFollowers() + " followers on Twitter");
 
       } else if (personalQuestion.get(i) == "instagram followers") {
         map.put(personalQuestion.get(i).toLowerCase(),
-            "I have " + r.getinstagramFollowers() + " followers on Instagram");
+            "I have approximately " + r.getinstagramFollowers() + " followers on Instagram");
 
       } else if (personalQuestion.get(i) == "tiktok followers") {
-        map.put(personalQuestion.get(i).toLowerCase(), "I have " + r.getinstagramFollowers() + " followers on TikTok");
+        map.put(personalQuestion.get(i).toLowerCase(), "I have approximately " + r.getinstagramFollowers() + " followers on TikTok");
 
       } else if (personalQuestion.get(i) == "net worth") {
-        map.put(personalQuestion.get(i).toLowerCase(), "My net worth is " + r.getnetWorth());
+        map.put(personalQuestion.get(i).toLowerCase(), "My net worth is approximately " + r.getnetWorth());
 
       } else if (personalQuestion.get(i) == "previous marriage") {
         map.put(personalQuestion.get(i).toLowerCase(), "I was previously married to " + r.getpreviousMarriage());
