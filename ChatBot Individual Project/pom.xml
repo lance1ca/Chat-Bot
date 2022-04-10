@@ -48,7 +48,6 @@
       <artifactId>jwiki</artifactId>
       <version>1.9.0</version>
     </dependency>
- 
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>

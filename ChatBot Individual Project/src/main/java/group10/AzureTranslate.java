@@ -1,10 +1,23 @@
+//FINAL INDIVIDUAL PROJECT
+//COSC 310 Twitter API Class **FINISHED**
+//By: LANCE ROGAN, 62708938 
+//Note: API from https://docs.microsoft.com/en-us/azure/cognitive-services/translator/quickstart-translator?tabs=java
+//This uses the google gson dependency
+//From this API documentation, it was noted to use:
+/*
+<dependency>
+      <groupId>com.squareup.okhttp</groupId>
+      <artifactId>okhttp</artifactId>
+      <version>2.7.5</version>
+    </dependency>
+*/ 
+//But this was causing errors, so I used the okhttp3 import (as VS Code suggested automatically) rather than that dependency
 
 package group10;
 import java.io.*;
-import java.net.*;
-import java.util.*;
 import com.google.gson.*;
 import okhttp3.*;
+
 
 
 
@@ -22,10 +35,40 @@ public class AzureTranslate {
     private static String userText;
    private static HttpUrl url;
    public static String targetLanguage;
+
+   //-------------------------------------------------------------------------------------------------------------------------------
+   public static String translateToTarget(String input){
+    userText = input;
+    url = new HttpUrl.Builder()
+    .scheme("https")
+    .host("api.cognitive.microsofttranslator.com")
+    .addPathSegment("/translate")
+    .addQueryParameter("api-version", "3.0")
+    .addQueryParameter("from", "en")
+    .addQueryParameter("to", targetLanguage)
+    .build();
+    try {
+        AzureTranslate translateRequest = new AzureTranslate();
+        String response = translateRequest.Post();
+        translatedInput = prettify(response);
+       
+        //method to parse the json text and get the translated text
+String[] parseJSONText = translatedInput.split("\\\"text\": \"|\\\",");
+
+return parseJSONText[1].toLowerCase();
+        
+    } catch (Exception e) {
+        System.out.println(e);
+    }
+    return translatedInput;
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------
     
 
 //-------------------------------------------------------------------------------------------------------------------------------
-    public static String translateToLanguage(String input){
+    public static String translateToEnglish(String input){
         userText = input;
         url = new HttpUrl.Builder()
         .scheme("https")
@@ -42,7 +85,7 @@ public class AzureTranslate {
            
             //method to parse the json text and get the translated text
 String[] parseJSONText = translatedInput.split("\\\"text\": \"|\\\",");
-System.out.println(parseJSONText[1].toLowerCase());
+//System.out.println(parseJSONText[1].toLowerCase());
 return parseJSONText[1].toLowerCase();
             
         } catch (Exception e) {
@@ -76,7 +119,7 @@ targetLanguage = parseJSONText[1];
         } catch (Exception e) {
             System.out.println(e);
         }
-        return translateToLanguage(input);
+        return translateToEnglish(input);
     }
     
 //-------------------------------------------------------------------------------------------------------------------------------
@@ -106,8 +149,5 @@ targetLanguage = parseJSONText[1];
         return gson.toJson(json);
     }
 
-    public static void main(String[]args){
-        detectLanguage("Hola");
-    }
 
 }

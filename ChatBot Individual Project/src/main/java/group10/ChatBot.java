@@ -518,15 +518,15 @@ public class ChatBot extends JFrame implements ActionListener {
         // otherwise, we don't do anything and proceed as normal.
         
           // a cool feature saying the chatbot is booting up for a delay of 2 seconds
-          chatArea.setText("Ryan Reynolds Chat bot booting up...\n");
+          chatArea.setText(AzureTranslate.translateToTarget("Ryan Reynolds Chat bot booting up...")+"\n");
           try {
             TimeUnit.SECONDS.sleep(2); // delaying the program for 2 seconds
           } catch (Exception g) {
-            chatArea.setText("Error Occurred"); // catching an error
+            chatArea.setText(AzureTranslate.translateToTarget("Error Occurred")); // catching an error
           }
           // setting the GUI text to be the greeting text below
           chatArea.setText("Ryan Reynolds: " +
-              "Hello! Nice to meet you! I am Ryan Reynolds, but in chat bot form...\nAsk me a question about myself or my movies!\n");
+          AzureTranslate.translateToTarget("Hello! Nice to meet you! I am Ryan Reynolds, but in chat bot form...\nAsk me a question about myself or my movies!")+"\n");
           startUp = false; // indicating we have started the program and there is no need to display this
                            // anymore or do the mapping initializations
         }
@@ -551,29 +551,39 @@ public class ChatBot extends JFrame implements ActionListener {
           //here we detect which language the user is speaking to the bot
           //Then it automatically translates this language text to english to read in our system to determine our output
           userInput = AzureTranslate.detectLanguage(userInput);
-  
-  
-          // *************NOTE: This API allows 100 requests per hour, so comment this out
-          // for testing at great amounts****************
-          // Specify your translation requirements here:
-          String fromLang = AzureTranslate.targetLanguage;
-          String toLang = "en";
-         
-            // setting the user input to be the translated text from target language to english
-            // and as lowercase
-            userInput2 = Translate.translate(fromLang, toLang, userInput).toLowerCase();
-            if(userInput.equals(userInput2)){
-              translateCheck = true;
-            }else{
-              translateCheck = false;
-            }
+          
             // System.out.println(userInput);
           } catch (Exception g) {
             System.out.println(g.getStackTrace());
             return;
           }
 
-
+          //PREVIOUS TRANSLATE API USED (USING AZURE MICROSOFT TRANSLATE API INSTEAD ^(SEEN ABOVE)^)
+          // try{
+          //   //here we detect which language the user is speaking to the bot
+          //   //Then it automatically translates this language text to english to read in our system to determine our output
+          //   userInput = AzureTranslate.detectLanguage(userInput);
+    
+    
+          //   // *************NOTE: This API allows 100 requests per hour, so comment this out
+          //   // for testing at great amounts****************
+          //   // Specify your translation requirements here:
+          //   String fromLang = AzureTranslate.targetLanguage;
+          //   String toLang = "en";
+           
+          //     // setting the user input to be the translated text from target language to english
+          //     // and as lowercase
+          //     userInput2 = Translate.translate(fromLang, toLang, userInput).toLowerCase();
+          //     if(userInput.equals(userInput2)){
+          //       translateCheck = true;
+          //     }else{
+          //       translateCheck = false;
+          //     }
+          //     // System.out.println(userInput);
+          //   } catch (Exception g) {
+          //     System.out.println(g.getStackTrace());
+          //     return;
+          //   }
 
 
        
@@ -617,9 +627,9 @@ public class ChatBot extends JFrame implements ActionListener {
         // if the user input equals goodbye, then we append the goodbye message, delay
         // the program for 3 seconds, and then
         // end the program
-        if (userInput.equals("goodbye")) {
+        if (userInput.equals(AzureTranslate.translateToTarget("goodbye"))) {
           // appending the goodbye message
-          chatArea.append("Ryan Reynolds: " + "Goodbye! Nice meeting you! I am shutting down now." + "\n");
+          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Goodbye! Nice meeting you! I am shutting down now.") + "\n");
           try {
             TimeUnit.SECONDS.sleep(3); // delaying the program for 2 seconds
           } catch (Exception g) {
@@ -631,11 +641,9 @@ public class ChatBot extends JFrame implements ActionListener {
           // which analyzes the input and then the method figures out how the chat bot
           // responds back to the user
         } else {
-          if(translateCheck==true){
+          
           chatBot(userInput); // call the chatbot function with the user input
-          }else{
-            chatArea.append("Error Occurred"); // catching an error
-          }
+          
         }
 
       }
@@ -904,7 +912,7 @@ public class ChatBot extends JFrame implements ActionListener {
     } else {
       // otherwise, if the user input is spelt wrong, we indicate there is an error
       // and say try again, and the process repeats
-      chatArea.append("Your message is spelt wrong! Try again.\n");
+      chatArea.append(AzureTranslate.translateToTarget("Your message is spelt wrong! Try again.")+"\n");
     }
   }
 
@@ -992,47 +1000,47 @@ public class ChatBot extends JFrame implements ActionListener {
     // this same process goes on for each possible keyword for questions to be asked
     if (userInput.contains(movieQuestion.get(0))) {
 
-      chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + imdbMap.get(movieTitleAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(imdbMap.get(movieTitleAsked)) + "\n");
       return;
 
     } else if (userInput.contains(movieQuestion.get(1))) {
-      chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + yearMap.get(movieTitleAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(yearMap.get(movieTitleAsked)) + "\n");
       return;
 
     } else if (userInput.contains(movieQuestion.get(2))) {
-      chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + ratingMap.get(movieTitleAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(ratingMap.get(movieTitleAsked)) + "\n");
       return;
 
     } else if (userInput.contains(movieQuestion.get(3))) {
-      chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + castMap.get(movieTitleAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(castMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(4))) {
-      chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + directorMap.get(movieTitleAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(directorMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(5))) {
-      chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + genreMap.get(movieTitleAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(genreMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(6))) {
-      chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + awardsMap.get(movieTitleAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(awardsMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(7))) {
-      chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + boxOfficeMap.get(movieTitleAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(boxOfficeMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(8))) {
-      chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + locationMap.get(movieTitleAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(locationMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(9)) || userInput.contains(movieQuestion.get(10))) {
-      chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + timeToFilmMap.get(movieTitleAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(timeToFilmMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(11)) || userInput.contains(movieQuestion.get(12))) {
-      chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + durationMap.get(movieTitleAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(durationMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(13))) {
-      chatArea.append("Ryan Reynolds: " + movieTitleAsked + " " + budgetMap.get(movieTitleAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(budgetMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(14)) ||userInput.contains(movieQuestion.get(15)) ||userInput.contains(movieQuestion.get(16))) {
-      chatArea.append("Ryan Reynolds: " + "Here is a summary of " + movieTitleAsked + ":\n"
-          + wikipediaMovieMap.get(movieTitleAsked)+"\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Here is a summary of ") + AzureTranslate.translateToTarget(movieTitleAsked) + ":\n"
+          + AzureTranslate.translateToTarget(wikipediaMovieMap.get(movieTitleAsked))+"\n");
 
     } else {
       defaultResponse();
@@ -1069,7 +1077,7 @@ public class ChatBot extends JFrame implements ActionListener {
         String tweetsInRange = TwitterAPI.getTweetsInRange(days);
 
         //append the result to the GUI in the correct format
-        chatArea.append("Ryan Reynolds: My most recent tweets in the past " + days + " days are... \n" + tweetsInRange+"\n");
+        chatArea.append("Ryan Reynolds: "+AzureTranslate.translateToTarget("My most recent tweets in the past ") + days + AzureTranslate.translateToTarget(" days are... ")+"\n" + AzureTranslate.translateToTarget(tweetsInRange)+"\n");
 
         //return
         return;
@@ -1080,23 +1088,23 @@ public class ChatBot extends JFrame implements ActionListener {
         //if the user input contains about, summary, or explain, then the user is asking for a summary of his wife and we call the WikipediaAPI to retrieve the information
         if(userInput.contains("about") || userInput.contains("summary") || userInput.contains("explain")){
           //append the result of the Wikipedia API for his wife
-          chatArea.append("Ryan Reynolds: Here is a little bit about my wife...\n"+WikipediaAPI.getSummaryOf("Blake Lively")+"\n");
+          chatArea.append("Ryan Reynolds: "+AzureTranslate.translateToTarget("Here is a little bit about my wife...")+"\n"+AzureTranslate.translateToTarget(WikipediaAPI.getSummaryOf("Blake Lively"))+"\n");
 
           //return
           return;
         //otherwise, we just return and append the normal map response for his wifes name
         }else{
-          chatArea.append("Ryan Reynolds: " + personalQuestionMap.get(personalQuestionAsked) + "\n");
+          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(personalQuestionMap.get(personalQuestionAsked)) + "\n");
         }
 
       //otherwise, if the personal question asked contains yourself, or you, return the response for the yourself key value pair
       //This accounts for some variability in translation of languages when asking about somebody
       }else if(userInput.contains("yourself") || userInput.contains("you")){
-        chatArea.append("Ryan Reynolds: " + personalQuestionMap.get("yourself") + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(personalQuestionMap.get("yourself")) + "\n");
       }else{
     //otherwise, we do our default mapping response if none of these special cases are triggered
     // prints the value in the map corresponding the the key = personalQuestionAsked
-    chatArea.append("Ryan Reynolds: " + personalQuestionMap.get(personalQuestionAsked) + "\n");
+    chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(personalQuestionMap.get(personalQuestionAsked)) + "\n");
       }
     askAQuestionResponse(); // asks a question back to the user 1/6 of the time
     }
@@ -1114,38 +1122,38 @@ public class ChatBot extends JFrame implements ActionListener {
     // switch statement to determine responses to a greeting
     switch (randomNumber) {
       case 0:
-        chatArea.append("Ryan Reynolds: " + "Hello!" + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hello!") + "\n");
         break;
       case 1:
-        chatArea.append("Ryan Reynolds: " + "Hey Hey!" + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey Hey!") + "\n");
         break;
       case 2:
-        chatArea.append("Ryan Reynolds: " + "Hi there" + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hi there") + "\n");
         break;
       case 3:
-        chatArea.append("Ryan Reynolds: " + "Hi how are ya!" + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hi how are ya!") + "\n");
         break;
       case 4:
-        chatArea.append("Ryan Reynolds: " + "Hello there" + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hello there") + "\n");
         break;
       case 5:
-        chatArea.append("Ryan Reynolds: " + "Hey! I am Ryan Reynolds, nice to meet you!" + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey! I am Ryan Reynolds, nice to meet you!") + "\n");
         break;
       case 6:
         chatArea.append("Ryan Reynolds: "
-            + "What a beautiful day to meet someone as great as me hey? Haha, Hi nice to meet you!" + "\n");
+            + AzureTranslate.translateToTarget("What a beautiful day to meet someone as great as me hey? Haha, Hi nice to meet you!") + "\n");
         break;
       case 7:
-        chatArea.append("Ryan Reynolds: " + "Yo!" + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Yo!") + "\n");
         break;
       case 8:
-        chatArea.append("Ryan Reynolds: " + "Hey there" + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey there") + "\n");
         break;
       case 9:
-        chatArea.append("Ryan Reynolds: " + "Hi, nice to meet you!" + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hi, nice to meet you!") + "\n");
         break;
       case 10:
-        chatArea.append("Ryan Reynolds: " + "Hey!" + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey!") + "\n");
         break;
       default:
         return;
@@ -1164,19 +1172,19 @@ public class ChatBot extends JFrame implements ActionListener {
     // if the user input contains the business question at index 0, we respond with
     // the year started value for key = businessNameAsked
     if (userInput.contains(businessQuestion.get(0))) {
-      chatArea.append("Ryan Reynolds: " + yearStartedMap.get(businessNameAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(yearStartedMap.get(businessNameAsked)) + "\n");
       return;
 
     } else if (userInput.contains(businessQuestion.get(1))) {
-      chatArea.append("Ryan Reynolds: " + businessLocationMap.get(businessNameAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(businessLocationMap.get(businessNameAsked)) + "\n");
       return;
 
     } else if (userInput.contains(businessQuestion.get(2))) {
-      chatArea.append("Ryan Reynolds: " + businessPositionMap.get(businessNameAsked) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(businessPositionMap.get(businessNameAsked)) + "\n");
       return;
     } else if (userInput.contains(businessQuestion.get(3)) ||userInput.contains(businessQuestion.get(4)) ||userInput.contains(businessQuestion.get(5))) {
-      chatArea.append("Ryan Reynolds: " + "Here is a summary of " + businessNameAsked + ":\n"
-          + wikipediaBusinessMap.get(businessNameAsked));
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Here is a summary of ") + AzureTranslate.translateToTarget(businessNameAsked) + ":\n"
+          + AzureTranslate.translateToTarget(wikipediaBusinessMap.get(businessNameAsked)));
 
     }else {
       defaultResponse();
@@ -1196,11 +1204,11 @@ public class ChatBot extends JFrame implements ActionListener {
     // to blank, and get the users input
     // and then respond with "Really!"
     if (random == 1) {
-      chatArea.append("Ryan Reynolds: " + "How about you?" + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("How about you?") + "\n");
       userInputUnformatted = chatField.getText();
       chatField.setText("");
-      chatArea.append("You: " + userInputUnformatted + "\n");
-      chatArea.append("Ryan Reynolds: Really!\n");
+      chatArea.append("You: " + AzureTranslate.translateToTarget(userInputUnformatted) + "\n");
+      chatArea.append("Ryan Reynolds: "+AzureTranslate.translateToTarget("Really!")+"\n");
 
     } else {
       // otherwise return
@@ -1224,20 +1232,20 @@ public class ChatBot extends JFrame implements ActionListener {
       // case statements: each is a unique response when the question is not
       // understood
       case 0:
-        chatArea.append("Ryan Reynolds: " + "I'm sorry I don't understand the question. Please ask me again!" + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("I'm sorry I don't understand the question. Please ask me again!") + "\n");
         break;
       case 1:
-        chatArea.append("Ryan Reynolds: " + "Pardon? I didn't quite get that." + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Pardon? I didn't quite get that.") + "\n");
         break;
       case 2:
         chatArea.append("Ryan Reynolds: "
-            + "I'm sorry I don't understand the question. Maybe it's because of your accent hahaha!" + "\n");
+            + AzureTranslate.translateToTarget("I'm sorry I don't understand the question. Maybe it's because of your accent hahaha!") + "\n");
         break;
       case 3:
-        chatArea.append("Ryan Reynolds: " + "Sorry, you will have to ask that again." + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Sorry, you will have to ask that again.") + "\n");
         break;
       case 4:
-        chatArea.append("Ryan Reynolds: " + "That was a confusing question! Can you ask me again?" + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("That was a confusing question! Can you ask me again?") + "\n");
         break;
       default:
     }
