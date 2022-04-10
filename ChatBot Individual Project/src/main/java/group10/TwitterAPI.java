@@ -2,6 +2,7 @@
 //COSC 310 Twitter API Class **FINISHED**
 //By: LANCE ROGAN, 62708938 
 
+//NOTE
 package group10;
 
 //importing require packages to access the Twitter API
