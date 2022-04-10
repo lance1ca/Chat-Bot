@@ -5,27 +5,19 @@
 //GRIFFIN WILCHUK, STUDENT #75303370 CARLA MATHER, STUDENT #22779193)
 package group10; //importing group10 package for maven project
 
-
-
 //importing all required packages for the program
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
-// import java.util.Scanner;, we no longer need a scanner since we are using a GUI
 import java.util.concurrent.TimeUnit;
 import java.awt.*;
 import javax.swing.*;
-
-import org.fastily.jwiki.core.Wiki;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 
 //----------------------------------------------------------------------------------------------------------------------------
 // our class ChatBot which extends JFrame and implements the action listener
@@ -45,15 +37,12 @@ public class ChatBot extends JFrame implements ActionListener {
   // strings to track user inputs
   static String userInput;
   static String userInputUnformatted;
-  public static String userInput2;
   // string to track which movie title was asked about
   static String movieTitleAsked;
   // string to track which personal question was asked about
   static String personalQuestionAsked;
   // string to track which business name was asked about
   static String businesNameAsked;
-// boolean to check that the translations on both API ends match, ensuring the correct translation
-  public static boolean translateCheck;
 
   // arraylists for the list of movies, movie questions, personal questions, and
   // greeting responses
@@ -100,10 +89,10 @@ public class ChatBot extends JFrame implements ActionListener {
   static HashMap<String, String> durationMap = new HashMap<String, String>();
   // Initializing the budget map
   static HashMap<String, String> budgetMap = new HashMap<String, String>();
-  //Initializing the wikipedia movie map
-  static HashMap<String,String> wikipediaMovieMap = new HashMap<String,String>();
-  //Initializing the wikipedia business map
-  static HashMap<String,String> wikipediaBusinessMap = new HashMap<String,String>();
+  // Initializing the wikipedia movie map
+  static HashMap<String, String> wikipediaMovieMap = new HashMap<String, String>();
+  // Initializing the wikipedia business map
+  static HashMap<String, String> wikipediaBusinessMap = new HashMap<String, String>();
 
   // creating a public and static JFrame frame
   public static JFrame frame;
@@ -288,7 +277,8 @@ public class ChatBot extends JFrame implements ActionListener {
     panel2 = new JPanel();
 
     // creating the image icon the by the ryan reynolds image
-    //image sourced from https://commons.wikimedia.org/wiki/File:Deadpool_2_Japan_Premiere_Red_Carpet_Ryan_Reynolds_(cropped_2).jpg
+    // image sourced from
+    // https://commons.wikimedia.org/wiki/File:Deadpool_2_Japan_Premiere_Red_Carpet_Ryan_Reynolds_(cropped_2).jpg
     image = new ImageIcon("ryan_reynolds.jpg");
 
     // creating the specified font
@@ -384,149 +374,150 @@ public class ChatBot extends JFrame implements ActionListener {
       } else {
 
         if (startUp == true) {
-        // initializing the greeting repsonse list
-        greetingResponses.add("hi");
-        greetingResponses.add("hello");
-        greetingResponses.add("hey");
+          // initializing the greeting repsonse list
+          greetingResponses.add("hi");
+          greetingResponses.add("hello");
+          greetingResponses.add("hey");
 
-        // here we are setting up the possible movie questions, and the possible movies
-        // to be asked about
-        // Initializing Movie Questions ArrayList
-        movieQuestion.add("imdb");
-        movieQuestion.add("year");
-        movieQuestion.add("rating");
-        movieQuestion.add("cast");
-        movieQuestion.add("director");
-        movieQuestion.add("genre");
-        movieQuestion.add("awards");
-        movieQuestion.add("box office");
-        movieQuestion.add("location");
-        movieQuestion.add("time");
-        movieQuestion.add("film");
-        movieQuestion.add("length");
-        movieQuestion.add("duration");
-        movieQuestion.add("budget");
-        movieQuestion.add("summary");
-        movieQuestion.add("about");
-        movieQuestion.add("explain");
+          // here we are setting up the possible movie questions, and the possible movies
+          // to be asked about
+          // Initializing Movie Questions ArrayList
+          movieQuestion.add("imdb");
+          movieQuestion.add("year");
+          movieQuestion.add("rating");
+          movieQuestion.add("cast");
+          movieQuestion.add("director");
+          movieQuestion.add("genre");
+          movieQuestion.add("awards");
+          movieQuestion.add("box office");
+          movieQuestion.add("location");
+          movieQuestion.add("time");
+          movieQuestion.add("film");
+          movieQuestion.add("length");
+          movieQuestion.add("duration");
+          movieQuestion.add("budget");
+          movieQuestion.add("summary");
+          movieQuestion.add("about");
+          movieQuestion.add("explain");
 
-        // Initializing the list of movies
-        listOfMovies.add(r.getDeadpool2());
-        listOfMovies.add(r.getDeadpool());
-        listOfMovies.add(r.getFreeGuy());
-        listOfMovies.add(r.getRIPD());
-        listOfMovies.add(r.getGreenLantern());
-        listOfMovies.add(r.getBuried());
-        listOfMovies.add(r.getSixUnderground());
-        listOfMovies.add(r.getRedNotice());
-        listOfMovies.add(r.getSelfLess());
-        listOfMovies.add(r.getTheHitmansBodyguard());
-        listOfMovies.add(r.getChangeUp());
-        listOfMovies.add(r.getTheProposal());
+          // Initializing the list of movies
+          listOfMovies.add(r.getDeadpool2());
+          listOfMovies.add(r.getDeadpool());
+          listOfMovies.add(r.getFreeGuy());
+          listOfMovies.add(r.getRIPD());
+          listOfMovies.add(r.getGreenLantern());
+          listOfMovies.add(r.getBuried());
+          listOfMovies.add(r.getSixUnderground());
+          listOfMovies.add(r.getRedNotice());
+          listOfMovies.add(r.getSelfLess());
+          listOfMovies.add(r.getTheHitmansBodyguard());
+          listOfMovies.add(r.getChangeUp());
+          listOfMovies.add(r.getTheProposal());
 
-        // Initializing the imdb map
-        fillInMovieMap(imdbMap, "imdb");
-        // Initializing the year map
-        fillInMovieMap(yearMap, "year");
-        // Initializing the rating map
-        fillInMovieMap(ratingMap, "rating");
-        // Initializing the cast map
-        fillInMovieMap(castMap, "cast");
-        // Initializing the director map
-        fillInMovieMap(directorMap, "director");
-        // Initializing the genre map
-        fillInMovieMap(genreMap, "genre");
-        // Initializing the awards map
-        fillInMovieMap(awardsMap, "awards");
-        // Initializing the box office map
-        fillInMovieMap(boxOfficeMap, "box office");
-        // Initializing the location map
-        fillInMovieMap(locationMap, "location");
-        // Initializing the timeToFilm map
-        fillInMovieMap(timeToFilmMap, "time");
-        // Initializing the duration map
-        fillInMovieMap(durationMap, "duration");
-        // Initializing the budget map
-        fillInMovieMap(budgetMap, "budget");
-        //initializing the wikipedia movie map
-        fillInMovieMap(wikipediaMovieMap,"summary");
+          // Initializing the imdb map
+          fillInMovieMap(imdbMap, "imdb");
+          // Initializing the year map
+          fillInMovieMap(yearMap, "year");
+          // Initializing the rating map
+          fillInMovieMap(ratingMap, "rating");
+          // Initializing the cast map
+          fillInMovieMap(castMap, "cast");
+          // Initializing the director map
+          fillInMovieMap(directorMap, "director");
+          // Initializing the genre map
+          fillInMovieMap(genreMap, "genre");
+          // Initializing the awards map
+          fillInMovieMap(awardsMap, "awards");
+          // Initializing the box office map
+          fillInMovieMap(boxOfficeMap, "box office");
+          // Initializing the location map
+          fillInMovieMap(locationMap, "location");
+          // Initializing the timeToFilm map
+          fillInMovieMap(timeToFilmMap, "time");
+          // Initializing the duration map
+          fillInMovieMap(durationMap, "duration");
+          // Initializing the budget map
+          fillInMovieMap(budgetMap, "budget");
+          // initializing the wikipedia movie map
+          fillInMovieMap(wikipediaMovieMap, "summary");
 
-        // ----------------------------------------------------------------------------------------------------------------------------
+          // ----------------------------------------------------------------------------------------------------------------------------
 
-        // here we add all the key words into the personal question list
-        personalQuestion.add("height");
-        personalQuestion.add("weight");
-        personalQuestion.add("hair colour");
-        personalQuestion.add("eye colour");
-        personalQuestion.add("gender");
-        personalQuestion.add("birthplace");
-        personalQuestion.add("birthdate");
-        personalQuestion.add("wife");
-        personalQuestion.add("kids names");
-        personalQuestion.add("social media handle");
-        personalQuestion.add("twitter followers");
-        personalQuestion.add("instagram followers");
-        personalQuestion.add("tiktok followers");
-        personalQuestion.add("net worth");
-        personalQuestion.add("previous marriage");
-        personalQuestion.add("other awards");
-        personalQuestion.add("old");
-        personalQuestion.add("tweets");
-        personalQuestion.add("following");
-        personalQuestion.add("followers");
-        personalQuestion.add("liked");
-        personalQuestion.add("yourself");
-        personalQuestion.add("you");
+          // here we add all the key words into the personal question list
+          personalQuestion.add("height");
+          personalQuestion.add("weight");
+          personalQuestion.add("hair colour");
+          personalQuestion.add("eye colour");
+          personalQuestion.add("gender");
+          personalQuestion.add("birthplace");
+          personalQuestion.add("birthdate");
+          personalQuestion.add("wife");
+          personalQuestion.add("kids names");
+          personalQuestion.add("social media handle");
+          personalQuestion.add("twitter followers");
+          personalQuestion.add("instagram followers");
+          personalQuestion.add("tiktok followers");
+          personalQuestion.add("net worth");
+          personalQuestion.add("previous marriage");
+          personalQuestion.add("other awards");
+          personalQuestion.add("old");
+          personalQuestion.add("tweets");
+          personalQuestion.add("following");
+          personalQuestion.add("followers");
+          personalQuestion.add("liked");
+          personalQuestion.add("yourself");
+          personalQuestion.add("you");
 
-        // here we are initializing the personal question map
-        fillInPersonalMap(personalQuestionMap);
+          // here we are initializing the personal question map
+          fillInPersonalMap(personalQuestionMap);
 
-        // here we are setting up the possible business questions, and the possible
-        // businesses
-        // to be asked about
-        // Initializing business Questions ArrayList
-        businessQuestion.add("year");
-        businessQuestion.add("location");
-        businessQuestion.add("position");
-        businessQuestion.add("summary");
-        businessQuestion.add("about");
-        businessQuestion.add("explain");
+          // here we are setting up the possible business questions, and the possible
+          // businesses
+          // to be asked about
+          // Initializing business Questions ArrayList
+          businessQuestion.add("year");
+          businessQuestion.add("location");
+          businessQuestion.add("position");
+          businessQuestion.add("summary");
+          businessQuestion.add("about");
+          businessQuestion.add("explain");
 
-        // Initializing the list of business
-        listOfBusiness.add(r.getMintMoblie());
-        listOfBusiness.add(r.getMaximumEffort());
-        listOfBusiness.add(r.getAviationAmericanGin());
-        listOfBusiness.add(r.getwrexhamAFC());
-        listOfBusiness.add(r.getgroupEffortInitiative());
-        listOfBusiness.add(r.getMNTN());
+          // Initializing the list of business
+          listOfBusiness.add(r.getMintMoblie());
+          listOfBusiness.add(r.getMaximumEffort());
+          listOfBusiness.add(r.getAviationAmericanGin());
+          listOfBusiness.add(r.getwrexhamAFC());
+          listOfBusiness.add(r.getgroupEffortInitiative());
+          listOfBusiness.add(r.getMNTN());
 
-        // Initializing the business maps
-        // Initializing the yearStarted map
-        fillInBusinessMap(yearStartedMap, "year");
-        // Initializing the businessLocation map
-        fillInBusinessMap(businessLocationMap, "location");
-        // Initializing the businessPosition map
-        fillInBusinessMap(businessPositionMap, "position");
-         //initializing the wikipedia business map
-        fillInBusinessMap(wikipediaBusinessMap,"summary");
+          // Initializing the business maps
+          // Initializing the yearStarted map
+          fillInBusinessMap(yearStartedMap, "year");
+          // Initializing the businessLocation map
+          fillInBusinessMap(businessLocationMap, "location");
+          // Initializing the businessPosition map
+          fillInBusinessMap(businessPositionMap, "position");
+          // initializing the wikipedia business map
+          fillInBusinessMap(wikipediaBusinessMap, "summary");
 
-        // ----------------------------------------------------------------------------------------------------------------------------
+          // ----------------------------------------------------------------------------------------------------------------------------
 
-        // here determines if the startup of the program is true
-        // if so, we display the start text to the user, and set the boolean to be false
-        // to it never does this again until it is re run from the start
-        // otherwise, we don't do anything and proceed as normal.
-        
+          // here determines if the startup of the program is true
+          // if so, we display the start text to the user, and set the boolean to be false
+          // to it never does this again until it is re run from the start
+          // otherwise, we don't do anything and proceed as normal.
+
           // a cool feature saying the chatbot is booting up for a delay of 2 seconds
-          chatArea.setText(AzureTranslate.translateToTarget("Ryan Reynolds Chat bot booting up...")+"\n");
+          chatArea.setText("Ryan Reynolds Chat bot booting up..." + "\n");
           try {
             TimeUnit.SECONDS.sleep(2); // delaying the program for 2 seconds
           } catch (Exception g) {
-            chatArea.setText(AzureTranslate.translateToTarget("Error Occurred")); // catching an error
+            chatArea.setText("Error Occurred"); // catching an error
           }
           // setting the GUI text to be the greeting text below
           chatArea.setText("Ryan Reynolds: " +
-          AzureTranslate.translateToTarget("Hello! Nice to meet you! I am Ryan Reynolds, but in chat bot form...\nAsk me a question about myself or my movies!")+"\n");
+              "Hello! Nice to meet you! I am Ryan Reynolds, but in chat bot form...\nAsk me a question about myself or my movies!"
+              + "\n");
           startUp = false; // indicating we have started the program and there is no need to display this
                            // anymore or do the mapping initializations
         }
@@ -539,57 +530,52 @@ public class ChatBot extends JFrame implements ActionListener {
         // lowercase
         userInputUnformatted = chatField.getText();
         userInput = chatField.getText().toLowerCase();
-        userInput2 = chatField.getText().toLowerCase();
-        // here we first translate our user input from spanish to english via our
-        // toolkit API
-        // if the input is already in english, this step is quick and the input will be
-        // the same.
-        // Otherwise this text is translated via the API.
 
-        
-        try{
-          //here we detect which language the user is speaking to the bot
-          //Then it automatically translates this language text to english to read in our system to determine our output
+        // here we try to detect the users language being spoken to the bot, and we then
+        // send this text to be
+        // translated from the language being spoken into english for processing
+        // responses etc
+        try {
+          // here we detect which language the user is speaking to the bot (es,en,fr, etc)
+          // Then it automatically translates this specific language text to english to
+          // read in our system to determine our output
           userInput = AzureTranslate.detectLanguage(userInput);
-          
-            // System.out.println(userInput);
-          } catch (Exception g) {
-            System.out.println(g.getStackTrace());
-            return;
-          }
 
-          //PREVIOUS TRANSLATE API USED (USING AZURE MICROSOFT TRANSLATE API INSTEAD ^(SEEN ABOVE)^)
-          // try{
-          //   //here we detect which language the user is speaking to the bot
-          //   //Then it automatically translates this language text to english to read in our system to determine our output
-          //   userInput = AzureTranslate.detectLanguage(userInput);
-    
-    
-          //   // *************NOTE: This API allows 100 requests per hour, so comment this out
-          //   // for testing at great amounts****************
-          //   // Specify your translation requirements here:
-          //   String fromLang = AzureTranslate.targetLanguage;
-          //   String toLang = "en";
-           
-          //     // setting the user input to be the translated text from target language to english
-          //     // and as lowercase
-          //     userInput2 = Translate.translate(fromLang, toLang, userInput).toLowerCase();
-          //     if(userInput.equals(userInput2)){
-          //       translateCheck = true;
-          //     }else{
-          //       translateCheck = false;
-          //     }
-          //     // System.out.println(userInput);
-          //   } catch (Exception g) {
-          //     System.out.println(g.getStackTrace());
-          //     return;
-          //   }
+          // if an error occurs we display the error code
+        } catch (Exception g) {
+          chatArea.append("Error in Translation occurred");
+          return;
+        }
 
+        // PREVIOUS TRANSLATE API USED (USING AZURE MICROSOFT TRANSLATE API INSTEAD
+        // ^(SEEN ABOVE)^)
+        // try{
+        // //here we detect which language the user is speaking to the bot
+        // //Then it automatically translates this language text to english to read in
+        // our system to determine our output
+        // userInput = AzureTranslate.detectLanguage(userInput);
 
-       
+        // // *************NOTE: This API allows 100 requests per hour, so comment this
+        // out
+        // // for testing at great amounts****************
+        // // Specify your translation requirements here:
+        // String fromLang = AzureTranslate.targetLanguage;
+        // String toLang = "en";
 
-        
-      
+        // // setting the user input to be the translated text from target language to
+        // english
+        // // and as lowercase
+        // userInput2 = Translate.translate(fromLang, toLang, userInput).toLowerCase();
+        // if(userInput.equals(userInput2)){
+        // translateCheck = true;
+        // }else{
+        // translateCheck = false;
+        // }
+        // // System.out.println(userInput);
+        // } catch (Exception g) {
+        // System.out.println(g.getStackTrace());
+        // return;
+        // }
 
         // Here we then use our second toolkit API to tokenize our user input after it
         // has been translated
@@ -629,7 +615,8 @@ public class ChatBot extends JFrame implements ActionListener {
         // end the program
         if (userInput.equals(AzureTranslate.translateToTarget("goodbye"))) {
           // appending the goodbye message
-          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Goodbye! Nice meeting you! I am shutting down now.") + "\n");
+          chatArea.append("Ryan Reynolds: "
+              + AzureTranslate.translateToTarget("Goodbye! Nice meeting you! I am shutting down now.") + "\n");
           try {
             TimeUnit.SECONDS.sleep(3); // delaying the program for 2 seconds
           } catch (Exception g) {
@@ -641,9 +628,9 @@ public class ChatBot extends JFrame implements ActionListener {
           // which analyzes the input and then the method figures out how the chat bot
           // responds back to the user
         } else {
-          
+
           chatBot(userInput); // call the chatbot function with the user input
-          
+
         }
 
       }
@@ -658,7 +645,7 @@ public class ChatBot extends JFrame implements ActionListener {
 
     // *****USE THIS TO ENSURE JAVA IMAGE ICON, BIN FILE, AND DICTONARY WORKS, make
     // sure image and txt files are in here!*****
-     //String dir = System.getProperty("user.dir");
+    // String dir = System.getProperty("user.dir");
     // // // directory from where the program was launched
     // System.out.println("Directory to go to-->"+dir);
     // if these three files are not in here it will not work
@@ -738,12 +725,14 @@ public class ChatBot extends JFrame implements ActionListener {
         map.put(listOfMovies.get(i).getTitle().toLowerCase(),
             " had a budget of " + listOfMovies.get(i).getBudgetOfMovie());
 
-      }else if(value == "summary"){
-        map.put(listOfMovies.get(i).getTitle().toLowerCase(),WikipediaAPI.getSummaryOf(listOfMovies.get(i).getTitle()));
+      } else if (value == "summary") {
+        // calling Wikipedia API to get the summart of that movie and enter it into the
+        // map
+        map.put(listOfMovies.get(i).getTitle().toLowerCase(),
+            WikipediaAPI.getSummaryOf(listOfMovies.get(i).getTitle()));
 
       } else {
 
-        
       }
 
     }
@@ -789,14 +778,16 @@ public class ChatBot extends JFrame implements ActionListener {
         map.put(personalQuestion.get(i).toLowerCase(), "My social media handle is " + r.getsocialMediaHandle());
 
       } else if (personalQuestion.get(i) == "twitter followers") {
-        map.put(personalQuestion.get(i).toLowerCase(), "I have approximately" + r.gettwitterFollowers() + " followers on Twitter");
+        map.put(personalQuestion.get(i).toLowerCase(),
+            "I have approximately " + r.gettwitterFollowers() + " followers on Twitter");
 
       } else if (personalQuestion.get(i) == "instagram followers") {
         map.put(personalQuestion.get(i).toLowerCase(),
             "I have approximately " + r.getinstagramFollowers() + " followers on Instagram");
 
       } else if (personalQuestion.get(i) == "tiktok followers") {
-        map.put(personalQuestion.get(i).toLowerCase(), "I have approximately " + r.getinstagramFollowers() + " followers on TikTok");
+        map.put(personalQuestion.get(i).toLowerCase(),
+            "I have approximately " + r.getinstagramFollowers() + " followers on TikTok");
 
       } else if (personalQuestion.get(i) == "net worth") {
         map.put(personalQuestion.get(i).toLowerCase(), "My net worth is approximately " + r.getnetWorth());
@@ -829,21 +820,28 @@ public class ChatBot extends JFrame implements ActionListener {
             + " Haha, or just because I am a robot, more specifically I am " + currentDays + " days, "
             + currentHours + " hours, " + currentMinutes + " minutes, and " + currentSeconds + " seconds " + "old!");
 
-      } else if(personalQuestion.get(i)=="tweets"){
-        //this is dealt with in the actual personal chat function in order to provide the user more functionality to provide a range
-        //for a number of dates to get tweets from
-        
-      } else if(personalQuestion.get(i) == "following"){
-        map.put(personalQuestion.get(i).toLowerCase(), "Some of the people I am following are...\n"+TwitterAPI.getSampleOfCurrentFollowing());
-      
-      }else if(personalQuestion.get(i) == "followers"){
-        map.put(personalQuestion.get(i).toLowerCase(), "Some of my followers are...\n"+TwitterAPI.getSampleOfCurrentFollowers());
+      } else if (personalQuestion.get(i) == "tweets") {
+        // this is dealt with in the actual personal chat function in order to provide
+        // the user more functionality to provide a range
+        // for a number of dates to get tweets from
 
-      }else if(personalQuestion.get(i) == "liked"){
-        map.put(personalQuestion.get(i).toLowerCase(), "Some of the tweets I have liked are...\n"+TwitterAPI.getLikedTweets());
+        // calling Twitter API's to get the twitter data and add it into the respective
+        // map with the key value pair
+      } else if (personalQuestion.get(i) == "following") {
+        map.put(personalQuestion.get(i).toLowerCase(),
+            "Some of the people I am following are... " + "\n" + TwitterAPI.getSampleOfCurrentFollowing());
 
-      }else if(personalQuestion.get(i)=="yourself") {
-        map.put(personalQuestion.get(i).toLowerCase(),"Here is a little bit about myself...\n" + WikipediaAPI.getSummaryOf("Ryan Reynolds"));
+      } else if (personalQuestion.get(i) == "followers") {
+        map.put(personalQuestion.get(i).toLowerCase(),
+            "Some of my followers are..." + "\n" + TwitterAPI.getSampleOfCurrentFollowers());
+
+      } else if (personalQuestion.get(i) == "liked") {
+        map.put(personalQuestion.get(i).toLowerCase(),
+            "Some of the tweets I have liked are..." + "\n" + TwitterAPI.getLikedTweets());
+
+      } else if (personalQuestion.get(i) == "yourself") {
+        map.put(personalQuestion.get(i).toLowerCase(),
+            "Here is a little bit about myself..." + "\n" + WikipediaAPI.getSummaryOf("Ryan Reynolds"));
       }
     }
   }
@@ -871,12 +869,14 @@ public class ChatBot extends JFrame implements ActionListener {
         map.put(listOfBusiness.get(i).getbusinessName().toLowerCase(),
             " The position is " + listOfBusiness.get(i).getbusinessPosition().toLowerCase() + " of "
                 + listOfBusiness.get(i).getbusinessName());
-      }else if(value == "summary"){
-        map.put(listOfBusiness.get(i).getbusinessName().toLowerCase(),WikipediaAPI.getSummaryOf(listOfBusiness.get(i).getbusinessName()));
+      } else if (value == "summary") {
+        // calling the Wikipedia API to get the business summary and add it into the map
+        // in the correct location
+        map.put(listOfBusiness.get(i).getbusinessName().toLowerCase(),
+            WikipediaAPI.getSummaryOf(listOfBusiness.get(i).getbusinessName()));
 
       } else {
 
-        
       }
 
     }
@@ -912,7 +912,7 @@ public class ChatBot extends JFrame implements ActionListener {
     } else {
       // otherwise, if the user input is spelt wrong, we indicate there is an error
       // and say try again, and the process repeats
-      chatArea.append(AzureTranslate.translateToTarget("Your message is spelt wrong! Try again.")+"\n");
+      chatArea.append(AzureTranslate.translateToTarget("Your message is spelt wrong! Try again.") + "\n");
     }
   }
 
@@ -998,49 +998,72 @@ public class ChatBot extends JFrame implements ActionListener {
     // if the user input contains the movie question at index 0, respond with the
     // string specified with the imdbMap value for the key = movieTitleAsked
     // this same process goes on for each possible keyword for questions to be asked
+
+    // NOTE: Here we call the AzureTranslate method which translates the given
+    // response from English to the target language
+    // In other words, if the user was speaking spanish to the Bot, then the target
+    // language is es (spanish), and we convert the user text
+    // from spanish to english to do our processing and obtain our correct response,
+    // and then we translate the chat bots ouput to the user
+    // back into this target language of spanish (or whatever language the user
+    // spoke, could be: en,fr,etc)
     if (userInput.contains(movieQuestion.get(0))) {
 
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(imdbMap.get(movieTitleAsked)) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+          + AzureTranslate.translateToTarget(imdbMap.get(movieTitleAsked)) + "\n");
       return;
 
     } else if (userInput.contains(movieQuestion.get(1))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(yearMap.get(movieTitleAsked)) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+          + AzureTranslate.translateToTarget(yearMap.get(movieTitleAsked)) + "\n");
       return;
 
     } else if (userInput.contains(movieQuestion.get(2))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(ratingMap.get(movieTitleAsked)) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+          + AzureTranslate.translateToTarget(ratingMap.get(movieTitleAsked)) + "\n");
       return;
 
     } else if (userInput.contains(movieQuestion.get(3))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(castMap.get(movieTitleAsked)) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+          + AzureTranslate.translateToTarget(castMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(4))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(directorMap.get(movieTitleAsked)) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+          + AzureTranslate.translateToTarget(directorMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(5))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(genreMap.get(movieTitleAsked)) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+          + AzureTranslate.translateToTarget(genreMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(6))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(awardsMap.get(movieTitleAsked)) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+          + AzureTranslate.translateToTarget(awardsMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(7))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(boxOfficeMap.get(movieTitleAsked)) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+          + AzureTranslate.translateToTarget(boxOfficeMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(8))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(locationMap.get(movieTitleAsked)) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+          + AzureTranslate.translateToTarget(locationMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(9)) || userInput.contains(movieQuestion.get(10))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(timeToFilmMap.get(movieTitleAsked)) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+          + AzureTranslate.translateToTarget(timeToFilmMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(11)) || userInput.contains(movieQuestion.get(12))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(durationMap.get(movieTitleAsked)) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+          + AzureTranslate.translateToTarget(durationMap.get(movieTitleAsked)) + "\n");
       return;
     } else if (userInput.contains(movieQuestion.get(13))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " " + AzureTranslate.translateToTarget(budgetMap.get(movieTitleAsked)) + "\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+          + AzureTranslate.translateToTarget(budgetMap.get(movieTitleAsked)) + "\n");
       return;
-    } else if (userInput.contains(movieQuestion.get(14)) ||userInput.contains(movieQuestion.get(15)) ||userInput.contains(movieQuestion.get(16))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Here is a summary of ") + AzureTranslate.translateToTarget(movieTitleAsked) + ":\n"
-          + AzureTranslate.translateToTarget(wikipediaMovieMap.get(movieTitleAsked))+"\n");
+    } else if (userInput.contains(movieQuestion.get(14)) || userInput.contains(movieQuestion.get(15))
+        || userInput.contains(movieQuestion.get(16))) {
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Here is a summary of ")
+          + AzureTranslate.translateToTarget(movieTitleAsked) + ":\n"
+          + AzureTranslate.translateToTarget(wikipediaMovieMap.get(movieTitleAsked)) + "\n");
 
     } else {
       defaultResponse();
@@ -1055,65 +1078,102 @@ public class ChatBot extends JFrame implements ActionListener {
   // response from the personal map
   // that gets the key of the question asked and prints the value of that key
   // value pair
+
+  // NOTE: Here we call the AzureTranslate method which translates the given
+  // response from English to the target language
+  // In other words, if the user was speaking spanish to the Bot, then the target
+  // language is es (spanish), and we convert the user text
+  // from spanish to english to do our processing and obtain our correct response,
+  // and then we translate the chat bots ouput to the user
+  // back into this target language of spanish (or whatever language the user
+  // spoke, could be: en,fr,etc)
   public static void personalChatFunction(String userInput, String personalQuestionAsked) {
 
-    //Here in these if statements we are checking for some special cases of questions
-    //if the personal question asked is about tweets in a given range we enter this if statement
-      if(personalQuestionAsked == "tweets"){
+    // Here in these if statements we are checking for some special cases of
+    // questions
+    // if the personal question asked is about tweets in a given range we enter this
+    // if statement
+    if (personalQuestionAsked == "tweets") {
 
-        //initializing the number of days
-        int days=0;
+      // initializing the number of days
+      int days = 0;
 
-        //for each token in the tokens array, if any of the tokens are a string number, we parse that integer and save the integer into days
-        for(int i=0; i<Tokenizer.tokens.length;i++){
+      // for each token in the tokens array, if any of the tokens are a string number,
+      // we parse that integer and save the integer into days
+      for (int i = 0; i < Tokenizer.tokens.length; i++) {
 
-        //if the string is a number then parse it and add it into days
-        if(Tokenizer.tokens[i].contains("1") || Tokenizer.tokens[i].contains("2")|| Tokenizer.tokens[i].contains("3")|| Tokenizer.tokens[i].contains("4")|| Tokenizer.tokens[i].contains("5")|| Tokenizer.tokens[i].contains("6")|| Tokenizer.tokens[i].contains("7")|| Tokenizer.tokens[i].contains("8")|| Tokenizer.tokens[i].contains("9")){
-            days = Integer.parseInt(Tokenizer.tokens[i]);
+        // if the string is a number then parse it and add it into days
+        if (Tokenizer.tokens[i].contains("1") || Tokenizer.tokens[i].contains("2") || Tokenizer.tokens[i].contains("3")
+            || Tokenizer.tokens[i].contains("4") || Tokenizer.tokens[i].contains("5")
+            || Tokenizer.tokens[i].contains("6") || Tokenizer.tokens[i].contains("7")
+            || Tokenizer.tokens[i].contains("8") || Tokenizer.tokens[i].contains("9")) {
+          days = Integer.parseInt(Tokenizer.tokens[i]);
         }
-        }
-        //set the string tweets in a given range to be the Twitter API class method that retrieves the tweets in that range over those number of days
-        //this method returns a string
-        String tweetsInRange = TwitterAPI.getTweetsInRange(days);
-
-        //append the result to the GUI in the correct format
-        chatArea.append("Ryan Reynolds: "+AzureTranslate.translateToTarget("My most recent tweets in the past ") + days + AzureTranslate.translateToTarget(" days are... ")+"\n" + AzureTranslate.translateToTarget(tweetsInRange)+"\n");
-
-        //return
-        return;
-
-      //Otherwise, if the personal question asked is wife, then we want to check if the user is asking for a summary of his wife or just who his wife is
-      }else if(personalQuestionAsked == "wife"){
-
-        //if the user input contains about, summary, or explain, then the user is asking for a summary of his wife and we call the WikipediaAPI to retrieve the information
-        if(userInput.contains("about") || userInput.contains("summary") || userInput.contains("explain")){
-          //append the result of the Wikipedia API for his wife
-          chatArea.append("Ryan Reynolds: "+AzureTranslate.translateToTarget("Here is a little bit about my wife...")+"\n"+AzureTranslate.translateToTarget(WikipediaAPI.getSummaryOf("Blake Lively"))+"\n");
-
-          //return
-          return;
-        //otherwise, we just return and append the normal map response for his wifes name
-        }else{
-          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(personalQuestionMap.get(personalQuestionAsked)) + "\n");
-        }
-
-      //otherwise, if the personal question asked contains yourself, or you, return the response for the yourself key value pair
-      //This accounts for some variability in translation of languages when asking about somebody
-      }else if(userInput.contains("yourself") || userInput.contains("you")){
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(personalQuestionMap.get("yourself")) + "\n");
-      }else{
-    //otherwise, we do our default mapping response if none of these special cases are triggered
-    // prints the value in the map corresponding the the key = personalQuestionAsked
-    chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(personalQuestionMap.get(personalQuestionAsked)) + "\n");
       }
-    askAQuestionResponse(); // asks a question back to the user 1/6 of the time
+      // set the string tweets in a given range to be the Twitter API class method
+      // that retrieves the tweets in that range over those number of days
+      // this method returns a string
+      String tweetsInRange = TwitterAPI.getTweetsInRange(days);
+
+      // append the result to the GUI in the correct format
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("My most recent tweets in the past ") + days
+          + AzureTranslate.translateToTarget(" days are... ") + "\n" + AzureTranslate.translateToTarget(tweetsInRange)
+          + "\n");
+
+      // return
+      return;
+
+      // Otherwise, if the personal question asked is wife, then we want to check if
+      // the user is asking for a summary of his wife or just who his wife is
+    } else if (personalQuestionAsked == "wife") {
+
+      // if the user input contains about, summary, or explain, then the user is
+      // asking for a summary of his wife and we call the WikipediaAPI to retrieve the
+      // information
+      if (userInput.contains("about") || userInput.contains("summary") || userInput.contains("explain")) {
+        // append the result of the Wikipedia API for his wife
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Here is a little bit about my wife...")
+            + "\n" + AzureTranslate.translateToTarget(WikipediaAPI.getSummaryOf("Blake Lively")) + "\n");
+
+        // return
+        return;
+        // otherwise, we just return and append the normal map response for his wifes
+        // name
+      } else {
+        chatArea.append("Ryan Reynolds: "
+            + AzureTranslate.translateToTarget(personalQuestionMap.get(personalQuestionAsked)) + "\n");
+      }
+
+      // otherwise, if the personal question asked contains yourself, or you, return
+      // the response for the yourself key value pair
+      // This accounts for some variability in translation of languages when asking
+      // about somebody
+    } else if (userInput.contains("yourself") || userInput.contains("you")) {
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(personalQuestionMap.get("yourself")) + "\n");
+    } else {
+      // otherwise, we do our default mapping response if none of these special cases
+      // are triggered
+      // prints the value in the map corresponding the the key = personalQuestionAsked
+      chatArea.append(
+          "Ryan Reynolds: " + AzureTranslate.translateToTarget(personalQuestionMap.get(personalQuestionAsked)) + "\n");
     }
+    askAQuestionResponse(); // asks a question back to the user 1/6 of the time
+  }
 
   // ----------------------------------------------------------------------------------------------------------------------------
   // below is the greeting method
   // this is the greeting method, this method generates a random number from 0 to
   // 10 and determines how the chatbot would
   // respond to the user saying hello
+
+  // NOTE: Here we call the AzureTranslate method which translates the given
+  // response from English to the target language
+  // In other words, if the user was speaking spanish to the Bot, then the target
+  // language is es (spanish), and we convert the user text
+  // from spanish to english to do our processing and obtain our correct response,
+  // and then we translate the chat bots ouput to the user
+  // back into this target language of spanish (or whatever language the user
+  // spoke, could be: en,fr,etc)
   public static void greetingChatFunction() {
 
     // generate random number from 0 to 10
@@ -1137,11 +1197,14 @@ public class ChatBot extends JFrame implements ActionListener {
         chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hello there") + "\n");
         break;
       case 5:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey! I am Ryan Reynolds, nice to meet you!") + "\n");
+        chatArea.append(
+            "Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey! I am Ryan Reynolds, nice to meet you!") + "\n");
         break;
       case 6:
         chatArea.append("Ryan Reynolds: "
-            + AzureTranslate.translateToTarget("What a beautiful day to meet someone as great as me hey? Haha, Hi nice to meet you!") + "\n");
+            + AzureTranslate.translateToTarget(
+                "What a beautiful day to meet someone as great as me hey? Haha, Hi nice to meet you!")
+            + "\n");
         break;
       case 7:
         chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Yo!") + "\n");
@@ -1171,22 +1234,36 @@ public class ChatBot extends JFrame implements ActionListener {
 
     // if the user input contains the business question at index 0, we respond with
     // the year started value for key = businessNameAsked
+
+    // NOTE: Here we call the AzureTranslate method which translates the given
+    // response from English to the target language
+    // In other words, if the user was speaking spanish to the Bot, then the target
+    // language is es (spanish), and we convert the user text
+    // from spanish to english to do our processing and obtain our correct response,
+    // and then we translate the chat bots ouput to the user
+    // back into this target language of spanish (or whatever language the user
+    // spoke, could be: en,fr,etc)
     if (userInput.contains(businessQuestion.get(0))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(yearStartedMap.get(businessNameAsked)) + "\n");
+      chatArea
+          .append("Ryan Reynolds: " + AzureTranslate.translateToTarget(yearStartedMap.get(businessNameAsked)) + "\n");
       return;
 
     } else if (userInput.contains(businessQuestion.get(1))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(businessLocationMap.get(businessNameAsked)) + "\n");
+      chatArea.append(
+          "Ryan Reynolds: " + AzureTranslate.translateToTarget(businessLocationMap.get(businessNameAsked)) + "\n");
       return;
 
     } else if (userInput.contains(businessQuestion.get(2))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(businessPositionMap.get(businessNameAsked)) + "\n");
+      chatArea.append(
+          "Ryan Reynolds: " + AzureTranslate.translateToTarget(businessPositionMap.get(businessNameAsked)) + "\n");
       return;
-    } else if (userInput.contains(businessQuestion.get(3)) ||userInput.contains(businessQuestion.get(4)) ||userInput.contains(businessQuestion.get(5))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Here is a summary of ") + AzureTranslate.translateToTarget(businessNameAsked) + ":\n"
+    } else if (userInput.contains(businessQuestion.get(3)) || userInput.contains(businessQuestion.get(4))
+        || userInput.contains(businessQuestion.get(5))) {
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Here is a summary of ")
+          + AzureTranslate.translateToTarget(businessNameAsked) + ":\n"
           + AzureTranslate.translateToTarget(wikipediaBusinessMap.get(businessNameAsked)));
 
-    }else {
+    } else {
       defaultResponse();
       return;
     }
@@ -1197,6 +1274,15 @@ public class ChatBot extends JFrame implements ActionListener {
 
   // below is the ask a question method which determines if the bot asks the
   // question back to the user or not
+
+  // NOTE: Here we call the AzureTranslate method which translates the given
+  // response from English to the target language
+  // In other words, if the user was speaking spanish to the Bot, then the target
+  // language is es (spanish), and we convert the user text
+  // from spanish to english to do our processing and obtain our correct response,
+  // and then we translate the chat bots ouput to the user
+  // back into this target language of spanish (or whatever language the user
+  // spoke, could be: en,fr,etc)
   public static void askAQuestionResponse() {
     int random = (int) (Math.random() * 6); // 1/6 of the time the chat bot asks a question back to the user
 
@@ -1208,7 +1294,7 @@ public class ChatBot extends JFrame implements ActionListener {
       userInputUnformatted = chatField.getText();
       chatField.setText("");
       chatArea.append("You: " + AzureTranslate.translateToTarget(userInputUnformatted) + "\n");
-      chatArea.append("Ryan Reynolds: "+AzureTranslate.translateToTarget("Really!")+"\n");
+      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Really!") + "\n");
 
     } else {
       // otherwise return
@@ -1220,6 +1306,15 @@ public class ChatBot extends JFrame implements ActionListener {
   // ----------------------------------------------------------------------------------------------------------------------------
   // this is a method that is called as a default response if the chat bot is
   // unable to determine how to respond
+
+  // NOTE: Here we call the AzureTranslate method which translates the given
+  // response from English to the target language
+  // In other words, if the user was speaking spanish to the Bot, then the target
+  // language is es (spanish), and we convert the user text
+  // from spanish to english to do our processing and obtain our correct response,
+  // and then we translate the chat bots ouput to the user
+  // back into this target language of spanish (or whatever language the user
+  // spoke, could be: en,fr,etc)
   public static void defaultResponse() {
     // If all else fails and the chat bot does not not how to respond, we have these
     // 6 statements set as
@@ -1232,20 +1327,27 @@ public class ChatBot extends JFrame implements ActionListener {
       // case statements: each is a unique response when the question is not
       // understood
       case 0:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("I'm sorry I don't understand the question. Please ask me again!") + "\n");
+        chatArea.append("Ryan Reynolds: "
+            + AzureTranslate.translateToTarget("I'm sorry I don't understand the question. Please ask me again!")
+            + "\n");
         break;
       case 1:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Pardon? I didn't quite get that.") + "\n");
+        chatArea
+            .append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Pardon? I didn't quite get that.") + "\n");
         break;
       case 2:
         chatArea.append("Ryan Reynolds: "
-            + AzureTranslate.translateToTarget("I'm sorry I don't understand the question. Maybe it's because of your accent hahaha!") + "\n");
+            + AzureTranslate.translateToTarget(
+                "I'm sorry I don't understand the question. Maybe it's because of your accent hahaha!")
+            + "\n");
         break;
       case 3:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Sorry, you will have to ask that again.") + "\n");
+        chatArea.append(
+            "Ryan Reynolds: " + AzureTranslate.translateToTarget("Sorry, you will have to ask that again.") + "\n");
         break;
       case 4:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("That was a confusing question! Can you ask me again?") + "\n");
+        chatArea.append("Ryan Reynolds: "
+            + AzureTranslate.translateToTarget("That was a confusing question! Can you ask me again?") + "\n");
         break;
       default:
     }
@@ -1265,7 +1367,8 @@ public class ChatBot extends JFrame implements ActionListener {
       if (oneWordWrong == false) {
         // call the spelling method to check the string at index i against the dictonary
         // file
-        //Note: base dictonary without personal additions from http://www.gwicks.net/dictionaries.htm?fbclid=IwAR3mDOwygLdUXX98hdnaLi
+        // Note: base dictonary without personal additions from
+        // http://www.gwicks.net/dictionaries.htm?fbclid=IwAR3mDOwygLdUXX98hdnaLi
         isMySpellingRight(userInput[i], "dictonary.txt");
       } else {
         // otherwise, oneWordWrong is true, and thus there is a spelling mistake so we

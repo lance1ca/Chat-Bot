@@ -290,7 +290,8 @@ public class TwitterAPI {
     String likedTweets = "";
 
     // An integer which defines the maximum number of results
-    //limiting it to 10 results as this is a reasonable amount of information to display
+    // limiting it to 10 results as this is a reasonable amount of information to
+    // display
     Integer maxResults = 10;
 
     // setting this to null as I dont need it
