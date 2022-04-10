@@ -281,6 +281,7 @@ public class ChatBot extends JFrame implements ActionListener {
     panel2 = new JPanel();
 
     // creating the image icon the by the ryan reynolds image
+    //image sourced from https://commons.wikimedia.org/wiki/File:Deadpool_2_Japan_Premiere_Red_Carpet_Ryan_Reynolds_(cropped_2).jpg
     image = new ImageIcon("ryan_reynolds.jpg");
 
     // creating the specified font
