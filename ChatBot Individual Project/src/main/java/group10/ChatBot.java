@@ -16,6 +16,9 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import java.awt.*;
 import javax.swing.*;
+
+import org.fastily.jwiki.core.Wiki;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -468,7 +471,7 @@ public class ChatBot extends JFrame implements ActionListener {
         personalQuestion.add("following");
         personalQuestion.add("followers");
         personalQuestion.add("liked");
-        personalQuestion.add("yourself")
+        personalQuestion.add("yourself");
 
         // here we are initializing the personal question map
         fillInPersonalMap(personalQuestionMap);
@@ -1016,25 +1019,53 @@ public class ChatBot extends JFrame implements ActionListener {
   // that gets the key of the question asked and prints the value of that key
   // value pair
   public static void personalChatFunction(String userInput, String personalQuestionAsked) {
+
+    //Here in these if statements we are checking for some special cases of questions
+    //if the personal question asked is about tweets in a given range we enter this if statement
       if(personalQuestionAsked == "tweets"){
 
+        //initializing the number of days
         int days=0;
 
+        //for each token in the tokens array, if any of the tokens are a string number, we parse that integer and save the integer into days
         for(int i=0; i<Tokenizer.tokens.length;i++){
-        
+
+        //if the string is a number then parse it and add it into days
         if(Tokenizer.tokens[i].contains("1") || Tokenizer.tokens[i].contains("2")|| Tokenizer.tokens[i].contains("3")|| Tokenizer.tokens[i].contains("4")|| Tokenizer.tokens[i].contains("5")|| Tokenizer.tokens[i].contains("6")|| Tokenizer.tokens[i].contains("7")|| Tokenizer.tokens[i].contains("8")|| Tokenizer.tokens[i].contains("9")){
             days = Integer.parseInt(Tokenizer.tokens[i]);
         }
         }
+        //set the string tweets in a given range to be the Twitter API class method that retrieves the tweets in that range over those number of days
+        //this method returns a string
         String tweetsInRange = TwitterAPI.getTweetsInRange(days);
+
+        //append the result to the GUI in the correct format
         chatArea.append("Ryan Reynolds: My most recent tweets in the past " + days + " days are... \n" + tweetsInRange+"\n");
+
+        //return
         return;
+
+      //Otherwise, if the personal question asked is wife, then we want to check if the user is asking for a summary of his wife or just who his wife is
+      }else if(personalQuestionAsked == "wife"){
+
+        //if the user input contains about, summary, or explain, then the user is asking for a summary of his wife and we call the WikipediaAPI to retrieve the information
+        if(userInput.contains("about") || userInput.contains("summary") || userInput.contains("explain")){
+          //append the result of the Wikipedia API for his wife
+          chatArea.append("Ryan Reynolds: Here is a little bit about my wife...\n"+WikipediaAPI.getSummaryOf("Blake Lively")+"\n");
+
+          //return
+          return;
+        //otherwise, we just return and append the normal map response for his wifes name
+        }else{
+          chatArea.append("Ryan Reynolds: " + personalQuestionMap.get(personalQuestionAsked) + "\n");
+        }
       }else{
+    //otherwise, we do our default mapping response if none of these special cases are triggered
     // prints the value in the map corresponding the the key = personalQuestionAsked
     chatArea.append("Ryan Reynolds: " + personalQuestionMap.get(personalQuestionAsked) + "\n");
       }
     askAQuestionResponse(); // asks a question back to the user 1/6 of the time
-  }
+    }
 
   // ----------------------------------------------------------------------------------------------------------------------------
   // below is the greeting method
