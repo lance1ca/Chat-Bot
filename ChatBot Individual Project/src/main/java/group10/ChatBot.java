@@ -26,6 +26,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+
 //----------------------------------------------------------------------------------------------------------------------------
 // our class ChatBot which extends JFrame and implements the action listener
 public class ChatBot extends JFrame implements ActionListener {
@@ -44,12 +45,15 @@ public class ChatBot extends JFrame implements ActionListener {
   // strings to track user inputs
   static String userInput;
   static String userInputUnformatted;
+  public static String userInput2;
   // string to track which movie title was asked about
   static String movieTitleAsked;
   // string to track which personal question was asked about
   static String personalQuestionAsked;
   // string to track which business name was asked about
   static String businesNameAsked;
+// boolean to check that the translations on both API ends match, ensuring the correct translation
+  public static boolean translateCheck;
 
   // arraylists for the list of movies, movie questions, personal questions, and
   // greeting responses
@@ -535,27 +539,47 @@ public class ChatBot extends JFrame implements ActionListener {
         // lowercase
         userInputUnformatted = chatField.getText();
         userInput = chatField.getText().toLowerCase();
-
+        userInput2 = chatField.getText().toLowerCase();
         // here we first translate our user input from spanish to english via our
         // toolkit API
         // if the input is already in english, this step is quick and the input will be
         // the same.
         // Otherwise this text is translated via the API.
 
-        // *************NOTE: This API allows 100 requests per hour, so comment this out
-        // for testing at great amounts****************
+        
+        try{
+          //here we detect which language the user is speaking to the bot
+          //Then it automatically translates this language text to english to read in our system to determine our output
+          userInput = AzureTranslate.detectLanguage(userInput);
+  
+  
+          // *************NOTE: This API allows 100 requests per hour, so comment this out
+          // for testing at great amounts****************
+          // Specify your translation requirements here:
+          String fromLang = AzureTranslate.targetLanguage;
+          String toLang = "en";
+         
+            // setting the user input to be the translated text from target language to english
+            // and as lowercase
+            userInput2 = Translate.translate(fromLang, toLang, userInput).toLowerCase();
+            if(userInput.equals(userInput2)){
+              translateCheck = true;
+            }else{
+              translateCheck = false;
+            }
+            // System.out.println(userInput);
+          } catch (Exception g) {
+            System.out.println(g.getStackTrace());
+            return;
+          }
 
-        // Specify your translation requirements here:
-        String fromLang = "es";
-        String toLang = "en";
-        try {
-          // setting the user input to be the translated text from spanish to english
-          // and as lowercase
-          userInput = Translate.translate(fromLang, toLang, userInput).toLowerCase();
-          // System.out.println(userInput);
-        } catch (Exception g) {
-          return;
-        }
+
+
+
+       
+
+        
+      
 
         // Here we then use our second toolkit API to tokenize our user input after it
         // has been translated
@@ -607,7 +631,11 @@ public class ChatBot extends JFrame implements ActionListener {
           // which analyzes the input and then the method figures out how the chat bot
           // responds back to the user
         } else {
+          if(translateCheck==true){
           chatBot(userInput); // call the chatbot function with the user input
+          }else{
+            chatArea.append("Error Occurred"); // catching an error
+          }
         }
 
       }
