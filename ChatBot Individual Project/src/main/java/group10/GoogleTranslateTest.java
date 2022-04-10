@@ -1,19 +1,34 @@
 package group10;
+import com.google.api.Page;
+import com.google.api.client.util.Lists;
+import com.google.auth.oauth2.GoogleCredentials;
 // Imports the Google Cloud Translation library.
 import com.google.cloud.translate.v3.LocationName;
 import com.google.cloud.translate.v3.TranslateTextRequest;
 import com.google.cloud.translate.v3.TranslateTextResponse;
 import com.google.cloud.translate.v3.Translation;
 import com.google.cloud.translate.v3.TranslationServiceClient;
+
+import io.grpc.Context.Storage;
+import io.opencensus.metrics.export.Distribution.Bucket;
+
+import java.io.FileInputStream;
 import java.io.IOException;
 
+import com.google.cloud.translate.*;
+public class GoogleTranslateTest {
 
-public class TranslateText {
+  public static void main(String[]args) throws IOException{
+    // TODO(developer): Uncomment these lines.
+
+
+    translateText();
+  }
 
   // Set and pass variables to overloaded translateText() method for translation.
   public static void translateText() throws IOException {
     // TODO(developer): Replace these variables before running the sample.
-    String projectId = "YOUR-PROJECT-ID";
+    String projectId = System.getenv("GOOGLE_APPLICATION_CREDENTIALS");
     // Supported Languages: https://cloud.google.com/translate/docs/languages
     String targetLanguage = "english";
     String text = "Hola";

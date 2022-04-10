@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import com.google.cloud.translate.Translate.TranslateOption;
 
 
 //this class is the translate class which is another Toolkit API used to translate the users input from various languages to english before
@@ -42,7 +43,7 @@ public class Translate {
    */
   // This method translates the user input from the language it comes in as, into
   // the language wanted
-  public static String translate(String fromLang, String toLang, String text) throws Exception {
+  public static String translate(String fromLang, String toLang, String userInput) throws Exception {
     // Should have used a 3rd party library to make a JSON string from an
     // object
     // builds the JSON data to send to translate below
@@ -55,7 +56,7 @@ public class Translate {
         .append(toLang)
         .append("\",")
         .append("\"text\":\"")
-        .append(text)
+        .append(userInput)
         .append("\"")
         .append("}")
         .toString();
