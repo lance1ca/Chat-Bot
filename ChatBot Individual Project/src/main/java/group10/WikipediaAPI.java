@@ -1,6 +1,7 @@
 //FINAL INDIVIDUAL PROJECT
 //COSC 310 Wikipedia API Class **FINISHED*
 //By: LANCE ROGAN, 62708938 
+//Note: API from https://github.com/fastily/jwiki which was retrieved from https://www.mediawiki.org/wiki/API:Client_code 
 
 package group10;
 
@@ -35,7 +36,7 @@ public class WikipediaAPI {
         //if the wiki page does NOT exist, aka wiki.exists of the input string is false, then we just return a message that this wiki page does not exist
         if(wiki.exists(input) == false){
             return "Sorry, I could not find the Wikipedia page you are looking for as it does not exist. Please rephrase your text and try again, or ask me about something else!";
-            
+
         //otherwise, we set the input summary to be the wiki object extracting the text from the wiki page for that specified input to get the summary of
         //and then return this summary string back to the user
         }else

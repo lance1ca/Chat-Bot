@@ -1193,6 +1193,7 @@ public class ChatBot extends JFrame implements ActionListener {
       if (oneWordWrong == false) {
         // call the spelling method to check the string at index i against the dictonary
         // file
+        //Note: base dictonary without personal additions from http://www.gwicks.net/dictionaries.htm?fbclid=IwAR3mDOwygLdUXX98hdnaLi
         isMySpellingRight(userInput[i], "dictonary.txt");
       } else {
         // otherwise, oneWordWrong is true, and thus there is a spelling mistake so we

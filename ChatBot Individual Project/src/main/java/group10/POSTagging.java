@@ -3,6 +3,7 @@
 //By: LANCE ROGAN, 62708938 
 //NOTE: GROUP PORTIONS DONE BY GROUP 10 (LANCE ROGAN, STUDENT #62708938 BLAKE ABLITT, STUDENT #37099595 BEN VAN BERGEYK, STUDENT #95307054 
 //GRIFFIN WILCHUK, STUDENT #75303370 CARLA MATHER, STUDENT #22779193)
+//Note: API from https://www.tutorialspoint.com/opennlp/opennlp_quick_guide.htm
 package group10;
 
 //importing required packages

@@ -1,8 +1,8 @@
 //FINAL INDIVIDUAL PROJECT
 //COSC 310 Twitter API Class **FINISHED**
 //By: LANCE ROGAN, 62708938 
-
-//NOTE
+//Note: API from https://github.com/twitterdev/twitter-api-java-sdk which was 
+//retrieved from https://developer.twitter.com/en/docs/twitter-api/tools-and-libraries/v2
 package group10;
 
 //importing require packages to access the Twitter API
