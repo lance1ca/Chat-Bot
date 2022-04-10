@@ -472,6 +472,7 @@ public class ChatBot extends JFrame implements ActionListener {
         personalQuestion.add("followers");
         personalQuestion.add("liked");
         personalQuestion.add("yourself");
+        personalQuestion.add("you");
 
         // here we are initializing the personal question map
         fillInPersonalMap(personalQuestionMap);
@@ -806,7 +807,7 @@ public class ChatBot extends JFrame implements ActionListener {
         map.put(personalQuestion.get(i).toLowerCase(), "Some of the tweets I have liked are...\n"+TwitterAPI.getLikedTweets());
 
       }else if(personalQuestion.get(i)=="yourself") {
-        map.put(personalQuestion.get(i).toLowerCase(),"Here is a little bit about myself...\n" + WikipediaAPI.getSummaryOf("Ryan Renyolds"));
+        map.put(personalQuestion.get(i).toLowerCase(),"Here is a little bit about myself...\n" + WikipediaAPI.getSummaryOf("Ryan Reynolds"));
       }
     }
   }
@@ -1059,6 +1060,11 @@ public class ChatBot extends JFrame implements ActionListener {
         }else{
           chatArea.append("Ryan Reynolds: " + personalQuestionMap.get(personalQuestionAsked) + "\n");
         }
+
+      //otherwise, if the personal question asked contains yourself, or you, return the response for the yourself key value pair
+      //This accounts for some variability in translation of languages when asking about somebody
+      }else if(userInput.contains("yourself") || userInput.contains("you")){
+        chatArea.append("Ryan Reynolds: " + personalQuestionMap.get("yourself") + "\n");
       }else{
     //otherwise, we do our default mapping response if none of these special cases are triggered
     // prints the value in the map corresponding the the key = personalQuestionAsked

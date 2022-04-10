@@ -23,7 +23,7 @@ public class WikipediaAPI {
         Wiki wiki = new Wiki.Builder().build();
 
         //Here we are checking if the user input equals one of these movie names, and if so we add "(film)" to the end for formatting purposes to access the correct Wikipedia Page.
-        if(input.equals("Deadpool") || input.equals("Deadpool 2")|| input.equals("Green Lantern")|| input.equals("6 Underground")|| input.equals("Red Notice")|| input.equals("Buried")){
+        if(input.equals("Deadpool") || input.equals("Green Lantern")|| input.equals("6 Underground")|| input.equals("Red Notice")|| input.equals("Buried")){
             input += " (film)";
         //Otherwise, if the movie being asked about is the proposal, then we add " (2009) film" onto the end for formatting purposes to access the correct wikipedia page
         }else if(input.equals("The Proposal")){

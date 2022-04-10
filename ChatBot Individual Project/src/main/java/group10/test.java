@@ -25,6 +25,8 @@ import java.time.OffsetDateTime;
 
 public class test {
     public static void main(String[]args) throws IOException{
+
+     //System.out.println( WikipediaAPI.getSummaryOf("Deadpool 2"));
     //    RyanReynolds r = new RyanReynolds("6ft 2", 190, "hazel", "light brown", "male", "Vancouver",
     //     "October 23 1976",
     //     "Blake Lively", "@vancityreynolds", 18900000, 41600000, 18700000, "$150 M", "Scarlett Johansson");
