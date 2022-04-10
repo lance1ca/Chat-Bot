@@ -467,7 +467,6 @@ public class ChatBot extends JFrame implements ActionListener {
         personalQuestion.add("following");
         personalQuestion.add("followers");
         personalQuestion.add("liked");
-        personalQuestion.add("mentioned");
 
         // here we are initializing the personal question map
         fillInPersonalMap(personalQuestionMap);
