@@ -468,6 +468,7 @@ public class ChatBot extends JFrame implements ActionListener {
         personalQuestion.add("following");
         personalQuestion.add("followers");
         personalQuestion.add("liked");
+        personalQuestion.add("yourself")
 
         // here we are initializing the personal question map
         fillInPersonalMap(personalQuestionMap);
@@ -801,8 +802,8 @@ public class ChatBot extends JFrame implements ActionListener {
       }else if(personalQuestion.get(i) == "liked"){
         map.put(personalQuestion.get(i).toLowerCase(), "Some of the tweets I have liked are...\n"+TwitterAPI.getLikedTweets());
 
-      }else {
-       
+      }else if(personalQuestion.get(i)=="yourself") {
+        map.put(personalQuestion.get(i).toLowerCase(),"Here is a little bit about myself...\n" + WikipediaAPI.getSummaryOf("Ryan Renyolds"));
       }
     }
   }
@@ -1173,9 +1174,6 @@ public class ChatBot extends JFrame implements ActionListener {
       case 4:
         chatArea.append("Ryan Reynolds: " + "That was a confusing question! Can you ask me again?" + "\n");
         break;
-      case 5:
-      chatArea.append("Ryan Reynolds: I am not sure how to respond to that, so I will just tell you about myself...\n" + WikipediaAPI.getSummaryOf("Ryan Renyolds"));
-      break;
       default:
     }
   }
