@@ -1,6 +1,11 @@
+//FINAL INDIVIDUAL PROJECT
+//COSC 310 Wikipedia API Class **FINISHED*
+//By: LANCE ROGAN, 62708938 
+
 package group10;
 
 import org.fastily.jwiki.core.Wiki;
+
 
 public class WikipediaAPI {
     

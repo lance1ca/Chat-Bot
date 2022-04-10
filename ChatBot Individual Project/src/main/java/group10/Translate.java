@@ -1,3 +1,8 @@
+//FINAL INDIVIDUAL PROJECT
+//COSC 310 Translate Class **FINISHED**
+//By: LANCE ROGAN, 62708938 
+//NOTE: GROUP PORTIONS DONE BY GROUP 10 (LANCE ROGAN, STUDENT #62708938 BLAKE ABLITT, STUDENT #37099595 BEN VAN BERGEYK, STUDENT #95307054 
+//GRIFFIN WILCHUK, STUDENT #75303370 CARLA MATHER, STUDENT #22779193)
 package group10;
 
 import java.io.BufferedReader;
@@ -5,13 +10,7 @@ import java.io.OutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-// GROUP 10 COSC 310 Translate Class ** Finished ** 
-// **A#3 FINISHED VERSION**
-/*
-By:
-LANCE ROGAN, STUDENT #62708938 BLAKE ABLITT, STUDENT #37099595 BEN VAN BERGEYK, STUDENT #95307054
-GRIFFIN WILCHUK, STUDENT #75303370 CARLA MATHER, STUDENT #22779193
-*/
+
 
 //this class is the translate class which is another Toolkit API used to translate the users input from various languages to english before
 //then further preceding to respond to the input. Note that we have it set from spanish to english but this can change if we would like to change it.

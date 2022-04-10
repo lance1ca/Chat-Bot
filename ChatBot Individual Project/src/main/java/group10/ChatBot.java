@@ -1,13 +1,11 @@
+//FINAL INDIVIDUAL PROJECT
+//COSC 310 Chat Bot Class **FINISHED**
+//By: LANCE ROGAN, 62708938 
+//NOTE: GROUP PORTIONS DONE BY GROUP 10 (LANCE ROGAN, STUDENT #62708938 BLAKE ABLITT, STUDENT #37099595 BEN VAN BERGEYK, STUDENT #95307054 
+//GRIFFIN WILCHUK, STUDENT #75303370 CARLA MATHER, STUDENT #22779193)
 package group10; //importing group10 package for maven project
 
-//FINAL A#3 CODE
-// GROUP 10 COSC 310 Main ChatBot Class ** Finished ** 
-// 
-/*
-By:
-LANCE ROGAN, STUDENT #62708938 BLAKE ABLITT, STUDENT #37099595 BEN VAN BERGEYK, STUDENT #95307054
-GRIFFIN WILCHUK, STUDENT #75303370 CARLA MATHER, STUDENT #22779193
-*/
+
 
 //importing all required packages for the program
 import java.time.LocalDate;
@@ -619,7 +617,7 @@ public class ChatBot extends JFrame implements ActionListener {
 
     // *****USE THIS TO ENSURE JAVA IMAGE ICON, BIN FILE, AND DICTONARY WORKS, make
     // sure image and txt files are in here!*****
-    // String dir = System.getProperty("user.dir");
+     //String dir = System.getProperty("user.dir");
     // // // directory from where the program was launched
     // System.out.println("Directory to go to-->"+dir);
     // if these three files are not in here it will not work
@@ -802,9 +800,6 @@ public class ChatBot extends JFrame implements ActionListener {
 
       }else if(personalQuestion.get(i) == "liked"){
         map.put(personalQuestion.get(i).toLowerCase(), "Some of the tweets I have liked are...\n"+TwitterAPI.getLikedTweets());
-
-      }else if(personalQuestion.get(i) == "mentioned"){
-        map.put(personalQuestion.get(i).toLowerCase(), "Some of the tweets I am mentioned on are...\n"+TwitterAPI.getTweetsMentioned());
 
       }else {
        
