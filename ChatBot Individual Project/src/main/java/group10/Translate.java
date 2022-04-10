@@ -3,6 +3,7 @@
 //By: LANCE ROGAN, 62708938 
 //NOTE: GROUP PORTIONS DONE BY GROUP 10 (LANCE ROGAN, STUDENT #62708938 BLAKE ABLITT, STUDENT #37099595 BEN VAN BERGEYK, STUDENT #95307054 
 //GRIFFIN WILCHUK, STUDENT #75303370 CARLA MATHER, STUDENT #22779193)
+
 //Note: API from https://whatsmate.github.io/2016-08-18-translate-text-java/
 package group10;
 
@@ -11,7 +12,7 @@ import java.io.OutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import com.google.cloud.translate.Translate.TranslateOption;
+
 
 
 //this class is the translate class which is another Toolkit API used to translate the users input from various languages to english before
