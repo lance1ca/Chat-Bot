@@ -1,5 +1,5 @@
 <h1 align="center"> Ryan Reynolds Chat Bot </h1>
-<h2 align="center"> COSC 310 - INDIVIDUAL PORTION</h2>
+<h2 align="center"> COSC 310 - INDIVIDUAL PROJECT</h2>
 <h3 align="center">By Lance Rogan, 62708938</h3>
 <h3 align="center">Group members for the group work: Blake Ablitt, Ben Van Bergeyk, <br>Griffin Wilchuk, and Carla Mather </h3>
 <p align="center">
