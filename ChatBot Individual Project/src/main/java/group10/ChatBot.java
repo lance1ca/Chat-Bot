@@ -37,10 +37,6 @@
 
 
 
-
-
-
-
 //FINAL INDIVIDUAL PROJECT
 //COSC 310 Chat Bot Class **FINISHED**
 //By: LANCE ROGAN, 62708938 
@@ -77,7 +73,7 @@ public class ChatBot extends JFrame implements ActionListener {
   static boolean askAQuestion = false;
   // boolean for start up statements
   static boolean startUp = true;
-  //boolean to keep track if the text was translated
+  // boolean to keep track if the text was translated
   public static boolean textWasTranslated;
   // strings to track user inputs
   static String userInput;
@@ -511,7 +507,7 @@ public class ChatBot extends JFrame implements ActionListener {
           personalQuestion.add("followers");
           personalQuestion.add("liked");
           personalQuestion.add("yourself");
-          personalQuestion.add("you");
+          personalQuestion.add("tell");
 
           // here we are initializing the personal question map
           fillInPersonalMap(personalQuestionMap);
@@ -576,8 +572,7 @@ public class ChatBot extends JFrame implements ActionListener {
         userInputUnformatted = chatField.getText();
         userInput = chatField.getText().toLowerCase();
 
-
-        //Using the AzureTranslate API
+        // Using the AzureTranslate API
         // here we try to detect the users language being spoken to the bot, and we then
         // send this text to be
         // translated from the language being spoken into english for processing
@@ -585,15 +580,18 @@ public class ChatBot extends JFrame implements ActionListener {
         try {
           // here we detect which language the user is speaking to the bot (es,en,fr, etc)
           AzureTranslate.detectLanguage(userInput);
-System.out.println(AzureTranslate.targetLanguage);
-          // Here we use the API to automatically translate this user text from the specific language text to english to
+          
+          // Here we use the API to automatically translate this user text from the
+          // specific language text to english to
           // read in our system to determine our output.
-          //Note: we only translate if the language is not in english, otherwise we continue since its already in english
-          if(AzureTranslate.targetLanguage != "en"){
+          // Note: we only translate if the language is not in english, otherwise we
+          // continue since its already in english
+          // and we indicated if it was translated using the boolean
+          if (AzureTranslate.targetLanguage != "en") {
             userInput = AzureTranslate.translateToEnglish(userInput).toLowerCase();
             textWasTranslated = true;
-          }else{
-            textWasTranslated = true;
+          } else {
+            textWasTranslated = false;
           }
 
           // if an error occurs we display the error code
@@ -665,10 +663,10 @@ System.out.println(AzureTranslate.targetLanguage);
         // here we append their name and input in the specified format to the chatArea
         chatArea.append(name + ": " + userInputUnformatted + "\n");
 
-        // if the user input equals goodbye, then we append the goodbye message, delay
-        // the program for 3 seconds, and then
-        // end the program
-        if (AzureTranslate.translateToTarget(userInput).contains("goodbye")) {
+        // if the user input equals goodbye in the users preferred language, then we append the goodbye message, delay
+        // the program for 3 seconds, and then end the program
+        //Note we are checking if it equals the translated version of goodbye in the specified language of choice by the user
+        if (userInput.contains(AzureTranslate.translateToTarget("goodbye")) || userInput.contains(AzureTranslate.translateToTarget("goodbye"))) {
           // appending the goodbye message
           chatArea.append("Ryan Reynolds: "
               + AzureTranslate.translateToTarget("Goodbye! Nice meeting you! I am shutting down now.") + "\n");
@@ -1062,63 +1060,166 @@ System.out.println(AzureTranslate.targetLanguage);
     // and then we translate the chat bots ouput to the user
     // back into this target language of spanish (or whatever language the user
     // spoke, could be: en,fr,etc)
+    // Furthermore, we note that if the textWasTranslated is false, i.e the text
+    // written by user is english
+    // then there is no need to translate it and we proceed as normal. Otherwise we
+    // translate it
+
     if (userInput.contains(movieQuestion.get(0))) {
 
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
-          + AzureTranslate.translateToTarget(imdbMap.get(movieTitleAsked)) + "\n");
-      return;
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + movieTitleAsked + " "
+            + imdbMap.get(movieTitleAsked) + "\n");
+        return;
+
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+            + AzureTranslate.translateToTarget(imdbMap.get(movieTitleAsked)) + "\n");
+        return;
+      }
 
     } else if (userInput.contains(movieQuestion.get(1))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
-          + AzureTranslate.translateToTarget(yearMap.get(movieTitleAsked)) + "\n");
-      return;
+
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + movieTitleAsked + " "
+            + yearMap.get(movieTitleAsked) + "\n");
+        return;
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+            + AzureTranslate.translateToTarget(yearMap.get(movieTitleAsked)) + "\n");
+        return;
+      }
 
     } else if (userInput.contains(movieQuestion.get(2))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
-          + AzureTranslate.translateToTarget(ratingMap.get(movieTitleAsked)) + "\n");
-      return;
+
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + movieTitleAsked + " "
+            + ratingMap.get(movieTitleAsked) + "\n");
+        return;
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+            + AzureTranslate.translateToTarget(ratingMap.get(movieTitleAsked)) + "\n");
+        return;
+      }
 
     } else if (userInput.contains(movieQuestion.get(3))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
-          + AzureTranslate.translateToTarget(castMap.get(movieTitleAsked)) + "\n");
-      return;
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + movieTitleAsked + " "
+            + castMap.get(movieTitleAsked) + "\n");
+        return;
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+            + AzureTranslate.translateToTarget(castMap.get(movieTitleAsked)) + "\n");
+        return;
+      }
+
     } else if (userInput.contains(movieQuestion.get(4))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
-          + AzureTranslate.translateToTarget(directorMap.get(movieTitleAsked)) + "\n");
-      return;
+
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + movieTitleAsked + " "
+            + directorMap.get(movieTitleAsked) + "\n");
+        return;
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+            + AzureTranslate.translateToTarget(directorMap.get(movieTitleAsked)) + "\n");
+        return;
+      }
+
     } else if (userInput.contains(movieQuestion.get(5))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
-          + AzureTranslate.translateToTarget(genreMap.get(movieTitleAsked)) + "\n");
-      return;
+
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + movieTitleAsked + " "
+            + genreMap.get(movieTitleAsked) + "\n");
+        return;
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+            + AzureTranslate.translateToTarget(genreMap.get(movieTitleAsked)) + "\n");
+        return;
+      }
+
     } else if (userInput.contains(movieQuestion.get(6))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
-          + AzureTranslate.translateToTarget(awardsMap.get(movieTitleAsked)) + "\n");
-      return;
+
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + movieTitleAsked + " "
+            + awardsMap.get(movieTitleAsked) + "\n");
+        return;
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+            + AzureTranslate.translateToTarget(awardsMap.get(movieTitleAsked)) + "\n");
+        return;
+      }
+
     } else if (userInput.contains(movieQuestion.get(7))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
-          + AzureTranslate.translateToTarget(boxOfficeMap.get(movieTitleAsked)) + "\n");
-      return;
+
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + movieTitleAsked + " "
+            + boxOfficeMap.get(movieTitleAsked) + "\n");
+        return;
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+            + AzureTranslate.translateToTarget(boxOfficeMap.get(movieTitleAsked)) + "\n");
+        return;
+      }
+
     } else if (userInput.contains(movieQuestion.get(8))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
-          + AzureTranslate.translateToTarget(locationMap.get(movieTitleAsked)) + "\n");
-      return;
+
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + movieTitleAsked + " "
+            + locationMap.get(movieTitleAsked) + "\n");
+        return;
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+            + AzureTranslate.translateToTarget(locationMap.get(movieTitleAsked)) + "\n");
+        return;
+      }
+
     } else if (userInput.contains(movieQuestion.get(9)) || userInput.contains(movieQuestion.get(10))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
-          + AzureTranslate.translateToTarget(timeToFilmMap.get(movieTitleAsked)) + "\n");
-      return;
+
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + movieTitleAsked + " "
+            + timeToFilmMap.get(movieTitleAsked) + "\n");
+        return;
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+            + AzureTranslate.translateToTarget(timeToFilmMap.get(movieTitleAsked)) + "\n");
+        return;
+      }
+
     } else if (userInput.contains(movieQuestion.get(11)) || userInput.contains(movieQuestion.get(12))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
-          + AzureTranslate.translateToTarget(durationMap.get(movieTitleAsked)) + "\n");
-      return;
+
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + movieTitleAsked + " "
+            + durationMap.get(movieTitleAsked) + "\n");
+        return;
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+            + AzureTranslate.translateToTarget(durationMap.get(movieTitleAsked)) + "\n");
+        return;
+      }
+
     } else if (userInput.contains(movieQuestion.get(13))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
-          + AzureTranslate.translateToTarget(budgetMap.get(movieTitleAsked)) + "\n");
-      return;
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + movieTitleAsked + " "
+            + budgetMap.get(movieTitleAsked) + "\n");
+        return;
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+            + AzureTranslate.translateToTarget(budgetMap.get(movieTitleAsked)) + "\n");
+        return;
+      }
+
     } else if (userInput.contains(movieQuestion.get(14)) || userInput.contains(movieQuestion.get(15))
         || userInput.contains(movieQuestion.get(16))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Here is a summary of ")
-          + AzureTranslate.translateToTarget(movieTitleAsked) + ":\n"
-          + AzureTranslate.translateToTarget(wikipediaMovieMap.get(movieTitleAsked)) + "\n");
+
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: Here is a summary of " + movieTitleAsked + "... \n"
+            + wikipediaMovieMap.get(movieTitleAsked) + "\n");
+        return;
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(movieTitleAsked) + " "
+            + AzureTranslate.translateToTarget(wikipediaMovieMap.get(movieTitleAsked)) + "\n");
+        return;
+      }
 
     } else {
       defaultResponse();
@@ -1142,6 +1243,10 @@ System.out.println(AzureTranslate.targetLanguage);
   // and then we translate the chat bots ouput to the user
   // back into this target language of spanish (or whatever language the user
   // spoke, could be: en,fr,etc)
+  // Furthermore, we note that if the textWasTranslated is false, i.e the text
+  // written by user is english
+  // then there is no need to translate it and we proceed as normal. Otherwise we
+  // translate it
   public static void personalChatFunction(String userInput, String personalQuestionAsked) {
 
     // Here in these if statements we are checking for some special cases of
@@ -1170,13 +1275,19 @@ System.out.println(AzureTranslate.targetLanguage);
       // this method returns a string
       String tweetsInRange = TwitterAPI.getTweetsInRange(days);
 
-      // append the result to the GUI in the correct format
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("My most recent tweets in the past ") + days
-          + AzureTranslate.translateToTarget(" days are... ") + "\n" + AzureTranslate.translateToTarget(tweetsInRange)
-          + "\n");
-
-      // return
-      return;
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + "My most recent tweets in the past " + days
+            + " days are... " + "\n" + tweetsInRange
+            + "\n");
+        return;
+      } else {
+        // append the result to the GUI in the correct format
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("My most recent tweets in the past ")
+            + days
+            + AzureTranslate.translateToTarget(" days are... ") + "\n" + AzureTranslate.translateToTarget(tweetsInRange)
+            + "\n");
+        return;
+      }
 
       // Otherwise, if the personal question asked is wife, then we want to check if
       // the user is asking for a summary of his wife or just who his wife is
@@ -1188,30 +1299,62 @@ System.out.println(AzureTranslate.targetLanguage);
       if (userInput.contains("about") || userInput.contains("summary") || userInput.contains("explain")) {
         // append the result of the Wikipedia API for his wife
         String wifeSummary = WikipediaAPI.getSummaryOf("Blake Lively");
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Here is a little bit about my wife...")
-            + "\n" + AzureTranslate.translateToTarget(wifeSummary) + "\n");
 
-        // return
-        return;
-        // otherwise, we just return and append the normal map response for his wifes
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: " + "Here is a little bit about my wife..."
+              + "\n" + wifeSummary + "\n");
+
+          // return
+          return;
+        } else {
+          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Here is a little bit about my wife...")
+              + "\n" + AzureTranslate.translateToTarget(wifeSummary) + "\n");
+
+          // return
+          return;
+        }
+
+        // otherwise, we just return and append the normal map response for his wife
         // name
       } else {
-        chatArea.append("Ryan Reynolds: "
-            + AzureTranslate.translateToTarget(personalQuestionMap.get(personalQuestionAsked)) + "\n");
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: "
+              + personalQuestionMap.get(personalQuestionAsked) + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: "
+              + AzureTranslate.translateToTarget(personalQuestionMap.get(personalQuestionAsked)) + "\n");
+        }
+
       }
 
-      // otherwise, if the personal question asked contains yourself, or you, return
+      // otherwise, if the personal question asked contains yourself or you AND tell then we know
+      //its asking about / to learn more and get a summary on the Ryan Reynolds chat bot so return
       // the response for the yourself key value pair
       // This accounts for some variability in translation of languages when asking
       // about somebody
-    } else if (userInput.contains("yourself") || userInput.contains("you")) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget(personalQuestionMap.get("yourself")) + "\n");
+    } else if ((userInput.contains("yourself") || userInput.contains("you")) && userInput.contains("tell")) {
+
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + personalQuestionMap.get("yourself") + "\n");
+      } else {
+        chatArea
+            .append("Ryan Reynolds: " + AzureTranslate.translateToTarget(personalQuestionMap.get("yourself")) + "\n");
+      }
+
     } else {
       // otherwise, we do our default mapping response if none of these special cases
       // are triggered
       // prints the value in the map corresponding the the key = personalQuestionAsked
-      chatArea.append(
-          "Ryan Reynolds: " + AzureTranslate.translateToTarget(personalQuestionMap.get(personalQuestionAsked)) + "\n");
+
+      if (textWasTranslated == false) {
+        chatArea.append(
+            "Ryan Reynolds: " + personalQuestionMap.get(personalQuestionAsked) + "\n");
+      } else {
+        chatArea.append(
+            "Ryan Reynolds: " + AzureTranslate.translateToTarget(personalQuestionMap.get(personalQuestionAsked))
+                + "\n");
+      }
+
     }
     askAQuestionResponse(); // asks a question back to the user 1/6 of the time
   }
@@ -1230,6 +1373,10 @@ System.out.println(AzureTranslate.targetLanguage);
   // and then we translate the chat bots ouput to the user
   // back into this target language of spanish (or whatever language the user
   // spoke, could be: en,fr,etc)
+  // Furthermore, we note that if the textWasTranslated is false, i.e the text
+  // written by user is english
+  // then there is no need to translate it and we proceed as normal. Otherwise we
+  // translate it
   public static void greetingChatFunction() {
 
     // generate random number from 0 to 10
@@ -1238,41 +1385,101 @@ System.out.println(AzureTranslate.targetLanguage);
     // switch statement to determine responses to a greeting
     switch (randomNumber) {
       case 0:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hello!") + "\n");
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: " + "Hello!" + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hello!") + "\n");
+        }
+
         break;
       case 1:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey Hey!") + "\n");
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: " + "Hey Hey!" + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey Hey!") + "\n");
+        }
+
         break;
       case 2:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hi there") + "\n");
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: " + "Hi there" + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hi there") + "\n");
+        }
+
         break;
       case 3:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hi how are ya!") + "\n");
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: " + "Hi how are ya!" + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hi how are ya!") + "\n");
+        }
+
         break;
       case 4:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hello there") + "\n");
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: " + "Hello there" + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hello there") + "\n");
+        }
+
         break;
       case 5:
-        chatArea.append(
-            "Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey! I am Ryan Reynolds, nice to meet you!") + "\n");
+        if (textWasTranslated == false) {
+          chatArea.append(
+              "Ryan Reynolds: " + "Hey! I am Ryan Reynolds, nice to meet you!" + "\n");
+        } else {
+          chatArea.append(
+              "Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey! I am Ryan Reynolds, nice to meet you!")
+                  + "\n");
+        }
+
         break;
       case 6:
-        chatArea.append("Ryan Reynolds: "
-            + AzureTranslate.translateToTarget(
-                "What a beautiful day to meet someone as great as me hey? Haha, Hi nice to meet you!")
-            + "\n");
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: "
+              +
+              "What a beautiful day to meet someone as great as me hey? Haha, Hi nice to meet you!"
+              + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: "
+              + AzureTranslate.translateToTarget(
+                  "What a beautiful day to meet someone as great as me hey? Haha, Hi nice to meet you!")
+              + "\n");
+        }
+
         break;
       case 7:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Yo!") + "\n");
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: " + "Yo!" + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Yo!") + "\n");
+        }
+
         break;
       case 8:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey there") + "\n");
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: " + "Hey there" + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey there") + "\n");
+        }
+
         break;
       case 9:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hi, nice to meet you!") + "\n");
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: " + "Hi, nice to meet you!" + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hi, nice to meet you!") + "\n");
+        }
+
         break;
       case 10:
-        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey!") + "\n");
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: " + "Hey!" + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Hey!") + "\n");
+        }
+
         break;
       default:
         return;
@@ -1299,25 +1506,57 @@ System.out.println(AzureTranslate.targetLanguage);
     // and then we translate the chat bots ouput to the user
     // back into this target language of spanish (or whatever language the user
     // spoke, could be: en,fr,etc)
+    // Furthermore, we note that if the textWasTranslated is false, i.e the text
+    // written by user is english
+    // then there is no need to translate it and we proceed as normal. Otherwise we
+    // translate it
     if (userInput.contains(businessQuestion.get(0))) {
-      chatArea
-          .append("Ryan Reynolds: " + AzureTranslate.translateToTarget(yearStartedMap.get(businessNameAsked)) + "\n");
+
+      if (textWasTranslated == false) {
+        chatArea
+            .append("Ryan Reynolds: " + yearStartedMap.get(businessNameAsked) + "\n");
+      } else {
+        chatArea
+            .append("Ryan Reynolds: " + AzureTranslate.translateToTarget(yearStartedMap.get(businessNameAsked)) + "\n");
+      }
+
       return;
 
     } else if (userInput.contains(businessQuestion.get(1))) {
-      chatArea.append(
-          "Ryan Reynolds: " + AzureTranslate.translateToTarget(businessLocationMap.get(businessNameAsked)) + "\n");
+
+      if (textWasTranslated == false) {
+        chatArea.append(
+            "Ryan Reynolds: " + businessLocationMap.get(businessNameAsked) + "\n");
+      } else {
+        chatArea.append(
+            "Ryan Reynolds: " + AzureTranslate.translateToTarget(businessLocationMap.get(businessNameAsked)) + "\n");
+      }
+
       return;
 
     } else if (userInput.contains(businessQuestion.get(2))) {
-      chatArea.append(
-          "Ryan Reynolds: " + AzureTranslate.translateToTarget(businessPositionMap.get(businessNameAsked)) + "\n");
+
+      if (textWasTranslated == false) {
+        chatArea.append(
+            "Ryan Reynolds: " + businessPositionMap.get(businessNameAsked) + "\n");
+      } else {
+        chatArea.append(
+            "Ryan Reynolds: " + AzureTranslate.translateToTarget(businessPositionMap.get(businessNameAsked)) + "\n");
+      }
+
       return;
     } else if (userInput.contains(businessQuestion.get(3)) || userInput.contains(businessQuestion.get(4))
         || userInput.contains(businessQuestion.get(5))) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Here is a summary of ")
-          + AzureTranslate.translateToTarget(businessNameAsked) + ":\n"
-          + AzureTranslate.translateToTarget(wikipediaBusinessMap.get(businessNameAsked)));
+
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + "Here is a summary of "
+            + businessNameAsked + ":\n"
+            + wikipediaBusinessMap.get(businessNameAsked));
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Here is a summary of ")
+            + AzureTranslate.translateToTarget(businessNameAsked) + ":\n"
+            + AzureTranslate.translateToTarget(wikipediaBusinessMap.get(businessNameAsked)));
+      }
 
     } else {
       defaultResponse();
@@ -1339,6 +1578,10 @@ System.out.println(AzureTranslate.targetLanguage);
   // and then we translate the chat bots ouput to the user
   // back into this target language of spanish (or whatever language the user
   // spoke, could be: en,fr,etc)
+  // Furthermore, we note that if the textWasTranslated is false, i.e the text
+  // written by user is english
+  // then there is no need to translate it and we proceed as normal. Otherwise we
+  // translate it
   public static void askAQuestionResponse() {
     int random = (int) (Math.random() * 6); // 1/6 of the time the chat bot asks a question back to the user
 
@@ -1346,11 +1589,20 @@ System.out.println(AzureTranslate.targetLanguage);
     // to blank, and get the users input
     // and then respond with "Really!"
     if (random == 1) {
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("How about you?") + "\n");
-      userInputUnformatted = chatField.getText();
-      chatField.setText("");
-      chatArea.append(name+": " + AzureTranslate.translateToTarget(userInputUnformatted) + "\n");
-      chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Really!") + "\n");
+
+      if (textWasTranslated == false) {
+        chatArea.append("Ryan Reynolds: " + "How about you?" + "\n");
+        userInputUnformatted = chatField.getText();
+        chatField.setText("");
+        chatArea.append(name + ": " + userInputUnformatted + "\n");
+        chatArea.append("Ryan Reynolds: " + "Really!" + "\n");
+      } else {
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("How about you?") + "\n");
+        userInputUnformatted = chatField.getText();
+        chatField.setText("");
+        chatArea.append(name + ": " + AzureTranslate.translateToTarget(userInputUnformatted) + "\n");
+        chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Really!") + "\n");
+      }
 
     } else {
       // otherwise return
@@ -1371,6 +1623,10 @@ System.out.println(AzureTranslate.targetLanguage);
   // and then we translate the chat bots ouput to the user
   // back into this target language of spanish (or whatever language the user
   // spoke, could be: en,fr,etc)
+  // Furthermore, we note that if the textWasTranslated is false, i.e the text
+  // written by user is english
+  // then there is no need to translate it and we proceed as normal. Otherwise we
+  // translate it
   public static void defaultResponse() {
     // If all else fails and the chat bot does not not how to respond, we have these
     // 6 statements set as
@@ -1383,27 +1639,65 @@ System.out.println(AzureTranslate.targetLanguage);
       // case statements: each is a unique response when the question is not
       // understood
       case 0:
-        chatArea.append("Ryan Reynolds: "
-            + AzureTranslate.translateToTarget("I'm sorry I don't understand the question. Please ask me again!")
-            + "\n");
+
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: "
+              + "I'm sorry I don't understand the question. Please ask me again!"
+              + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: "
+              + AzureTranslate.translateToTarget("I'm sorry I don't understand the question. Please ask me again!")
+              + "\n");
+        }
+
         break;
       case 1:
-        chatArea
-            .append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Pardon? I didn't quite get that.") + "\n");
+
+        if (textWasTranslated == false) {
+          chatArea
+              .append("Ryan Reynolds: " + "Pardon? I didn't quite get that." + "\n");
+        } else {
+          chatArea
+              .append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Pardon? I didn't quite get that.") + "\n");
+        }
+
         break;
       case 2:
-        chatArea.append("Ryan Reynolds: "
-            + AzureTranslate.translateToTarget(
-                "I'm sorry I don't understand the question. Maybe it's because of your accent hahaha!")
-            + "\n");
+
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: "
+              +
+              "I'm sorry I don't understand the question. Maybe it's because of your accent hahaha!"
+              + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: "
+              + AzureTranslate.translateToTarget(
+                  "I'm sorry I don't understand the question. Maybe it's because of your accent hahaha!")
+              + "\n");
+        }
+
         break;
       case 3:
-        chatArea.append(
-            "Ryan Reynolds: " + AzureTranslate.translateToTarget("Sorry, you will have to ask that again.") + "\n");
+
+        if (textWasTranslated == false) {
+          chatArea.append(
+              "Ryan Reynolds: " + "Sorry, you will have to ask that again." + "\n");
+        } else {
+          chatArea.append(
+              "Ryan Reynolds: " + AzureTranslate.translateToTarget("Sorry, you will have to ask that again.") + "\n");
+        }
+
         break;
       case 4:
-        chatArea.append("Ryan Reynolds: "
-            + AzureTranslate.translateToTarget("That was a confusing question! Can you ask me again?") + "\n");
+
+        if (textWasTranslated == false) {
+          chatArea.append("Ryan Reynolds: "
+              + "That was a confusing question! Can you ask me again?" + "\n");
+        } else {
+          chatArea.append("Ryan Reynolds: "
+              + AzureTranslate.translateToTarget("That was a confusing question! Can you ask me again?") + "\n");
+        }
+
         break;
       default:
     }

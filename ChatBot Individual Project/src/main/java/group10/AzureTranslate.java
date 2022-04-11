@@ -20,11 +20,7 @@ import com.google.gson.*;
 import okhttp3.*;
 
 public class AzureTranslate {
-    public static void main(String[]args){
-        String wifeSummary = WikipediaAPI.getSummaryOf("Blake Lively");
-        System.out.println(wifeSummary);
-        translateToTarget(wifeSummary);
-    }
+    
 
     // Defining public and private static variables to be used later:
 
@@ -108,7 +104,7 @@ public class AzureTranslate {
            // we set translatedInput to be this parsed json text at index 1 (where the text is in this string
             // array)
             translatedInput = parseJSONText[1];
-System.out.println(translatedInput);
+
             // if an error, we catch the exception and just return the original input
         } catch (Exception e) {
             System.out.println(e.getMessage());
