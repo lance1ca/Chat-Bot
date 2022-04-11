@@ -541,17 +541,22 @@ public class ChatBot extends JFrame implements ActionListener {
         try {
           // here we detect which language the user is speaking to the bot (es,en,fr, etc)
           AzureTranslate.detectLanguage(userInput);
-          
+
           // Here we use the API to automatically translate this user text from the
           // specific language text to english to
           // read in our system to determine our output.
           // Note: we only translate if the language is not in english, otherwise we
           // continue since its already in english
-          // and we indicated if it was translated using the boolean
+          // and we indicate if it was translated using the boolean
           if (AzureTranslate.targetLanguage != "en") {
+            // if user input not in english, then translate it from target language to
+            // english for processing
             userInput = AzureTranslate.translateToEnglish(userInput).toLowerCase();
+            // set that the text was translated to true
             textWasTranslated = true;
           } else {
+            // if the text was already in english, no translation is necessary for
+            // processing in english, so set text was translated to false
             textWasTranslated = false;
           }
 
@@ -624,10 +629,13 @@ public class ChatBot extends JFrame implements ActionListener {
         // here we append their name and input in the specified format to the chatArea
         chatArea.append(name + ": " + userInputUnformatted + "\n");
 
-        // if the user input equals goodbye in the users preferred language, then we append the goodbye message, delay
+        // if the user input equals goodbye in the users preferred language, then we
+        // append the goodbye message, delay
         // the program for 3 seconds, and then end the program
-        //Note we are checking if it equals the translated version of goodbye in the specified language of choice by the user
-        if (userInput.contains(AzureTranslate.translateToTarget("goodbye")) || userInput.contains(AzureTranslate.translateToTarget("goodbye"))) {
+        // Note we are checking if it equals the translated version of goodbye in the
+        // specified language of choice by the user
+        if (userInput.contains(AzureTranslate.translateToTarget("goodbye"))
+            || userInput.contains(AzureTranslate.translateToTarget("goodbye"))) {
           // appending the goodbye message
           chatArea.append("Ryan Reynolds: "
               + AzureTranslate.translateToTarget("Goodbye! Nice meeting you! I am shutting down now.") + "\n");
@@ -659,9 +667,9 @@ public class ChatBot extends JFrame implements ActionListener {
 
     // *****USE THIS TO ENSURE JAVA IMAGE ICON, BIN FILE, AND DICTONARY WORKS, make
     // sure image and txt files are in here!*****
-    // String dir = System.getProperty("user.dir");
+    String dir = System.getProperty("user.dir");
     // // // directory from where the program was launched
-    // System.out.println("Directory to go to-->"+dir);
+    System.out.println("Directory to go to-->" + dir);
     // if these three files are not in here it will not work
 
     // running the pre GUI to get the users name
@@ -740,7 +748,7 @@ public class ChatBot extends JFrame implements ActionListener {
             " had a budget of " + listOfMovies.get(i).getBudgetOfMovie());
 
       } else if (value == "summary") {
-        // calling Wikipedia API to get the summart of that movie and enter it into the
+        // calling Wikipedia API to get the summary of that movie and enter it into the
         // map
         map.put(listOfMovies.get(i).getTitle().toLowerCase(),
             WikipediaAPI.getSummaryOf(listOfMovies.get(i).getTitle()));
@@ -1018,13 +1026,18 @@ public class ChatBot extends JFrame implements ActionListener {
     // In other words, if the user was speaking spanish to the Bot, then the target
     // language is es (spanish), and we convert the user text
     // from spanish to english to do our processing and obtain our correct response,
-    // and then we translate the chat bots ouput to the user
-    // back into this target language of spanish (or whatever language the user
+    // and then we translate the chat bots output to the user
+    // from English back into this target language of spanish (or whatever language
+    // the user
     // spoke, could be: en,fr,etc)
+
     // Furthermore, we note that if the textWasTranslated is false, i.e the text
-    // written by user is english
-    // then there is no need to translate it and we proceed as normal. Otherwise we
-    // translate it
+    // written by user is in english
+    // then there is no need to translate it and we proceed as normal with
+    // processing and returning output.
+    // Else, or AKA otherwise we translate the user text from the language to
+    // english for processing and then the chat bots ouput from english to the
+    // language the user spoke
 
     if (userInput.contains(movieQuestion.get(0))) {
 
@@ -1201,13 +1214,19 @@ public class ChatBot extends JFrame implements ActionListener {
   // In other words, if the user was speaking spanish to the Bot, then the target
   // language is es (spanish), and we convert the user text
   // from spanish to english to do our processing and obtain our correct response,
-  // and then we translate the chat bots ouput to the user
-  // back into this target language of spanish (or whatever language the user
+  // and then we translate the chat bots output to the user
+  // from English back into this target language of spanish (or whatever language
+  // the user
   // spoke, could be: en,fr,etc)
+
   // Furthermore, we note that if the textWasTranslated is false, i.e the text
-  // written by user is english
-  // then there is no need to translate it and we proceed as normal. Otherwise we
-  // translate it
+  // written by user is in english
+  // then there is no need to translate it and we proceed as normal with
+  // processing and returning output.
+  // Else, or AKA otherwise we translate the user text from the language to
+  // english for processing and then the chat bots ouput from english to the
+  // language the user spoke
+
   public static void personalChatFunction(String userInput, String personalQuestionAsked) {
 
     // Here in these if statements we are checking for some special cases of
@@ -1288,8 +1307,10 @@ public class ChatBot extends JFrame implements ActionListener {
 
       }
 
-      // otherwise, if the personal question asked contains yourself or you AND tell then we know
-      //its asking about / to learn more and get a summary on the Ryan Reynolds chat bot so return
+      // otherwise, if the personal question asked contains yourself or you AND tell
+      // then we know
+      // its asking about / to learn more and get a summary on the Ryan Reynolds chat
+      // bot so return
       // the response for the yourself key value pair
       // This accounts for some variability in translation of languages when asking
       // about somebody
@@ -1331,13 +1352,19 @@ public class ChatBot extends JFrame implements ActionListener {
   // In other words, if the user was speaking spanish to the Bot, then the target
   // language is es (spanish), and we convert the user text
   // from spanish to english to do our processing and obtain our correct response,
-  // and then we translate the chat bots ouput to the user
-  // back into this target language of spanish (or whatever language the user
+  // and then we translate the chat bots output to the user
+  // from English back into this target language of spanish (or whatever language
+  // the user
   // spoke, could be: en,fr,etc)
+
   // Furthermore, we note that if the textWasTranslated is false, i.e the text
-  // written by user is english
-  // then there is no need to translate it and we proceed as normal. Otherwise we
-  // translate it
+  // written by user is in english
+  // then there is no need to translate it and we proceed as normal with
+  // processing and returning output.
+  // Else, or AKA otherwise we translate the user text from the language to
+  // english for processing and then the chat bots ouput from english to the
+  // language the user spoke
+
   public static void greetingChatFunction() {
 
     // generate random number from 0 to 10
@@ -1464,13 +1491,19 @@ public class ChatBot extends JFrame implements ActionListener {
     // In other words, if the user was speaking spanish to the Bot, then the target
     // language is es (spanish), and we convert the user text
     // from spanish to english to do our processing and obtain our correct response,
-    // and then we translate the chat bots ouput to the user
-    // back into this target language of spanish (or whatever language the user
+    // and then we translate the chat bots output to the user
+    // from English back into this target language of spanish (or whatever language
+    // the user
     // spoke, could be: en,fr,etc)
+
     // Furthermore, we note that if the textWasTranslated is false, i.e the text
-    // written by user is english
-    // then there is no need to translate it and we proceed as normal. Otherwise we
-    // translate it
+    // written by user is in english
+    // then there is no need to translate it and we proceed as normal with
+    // processing and returning output.
+    // Else, or AKA otherwise we translate the user text from the language to
+    // english for processing and then the chat bots ouput from english to the
+    // language the user spoke
+
     if (userInput.contains(businessQuestion.get(0))) {
 
       if (textWasTranslated == false) {
@@ -1536,13 +1569,19 @@ public class ChatBot extends JFrame implements ActionListener {
   // In other words, if the user was speaking spanish to the Bot, then the target
   // language is es (spanish), and we convert the user text
   // from spanish to english to do our processing and obtain our correct response,
-  // and then we translate the chat bots ouput to the user
-  // back into this target language of spanish (or whatever language the user
+  // and then we translate the chat bots output to the user
+  // from English back into this target language of spanish (or whatever language
+  // the user
   // spoke, could be: en,fr,etc)
+
   // Furthermore, we note that if the textWasTranslated is false, i.e the text
-  // written by user is english
-  // then there is no need to translate it and we proceed as normal. Otherwise we
-  // translate it
+  // written by user is in english
+  // then there is no need to translate it and we proceed as normal with
+  // processing and returning output.
+  // Else, or AKA otherwise we translate the user text from the language to
+  // english for processing and then the chat bots ouput from english to the
+  // language the user spoke
+
   public static void askAQuestionResponse() {
     int random = (int) (Math.random() * 6); // 1/6 of the time the chat bot asks a question back to the user
 
@@ -1581,13 +1620,19 @@ public class ChatBot extends JFrame implements ActionListener {
   // In other words, if the user was speaking spanish to the Bot, then the target
   // language is es (spanish), and we convert the user text
   // from spanish to english to do our processing and obtain our correct response,
-  // and then we translate the chat bots ouput to the user
-  // back into this target language of spanish (or whatever language the user
+  // and then we translate the chat bots output to the user
+  // from English back into this target language of spanish (or whatever language
+  // the user
   // spoke, could be: en,fr,etc)
+
   // Furthermore, we note that if the textWasTranslated is false, i.e the text
-  // written by user is english
-  // then there is no need to translate it and we proceed as normal. Otherwise we
-  // translate it
+  // written by user is in english
+  // then there is no need to translate it and we proceed as normal with
+  // processing and returning output.
+  // Else, or AKA otherwise we translate the user text from the language to
+  // english for processing and then the chat bots ouput from english to the
+  // language the user spoke
+
   public static void defaultResponse() {
     // If all else fails and the chat bot does not not how to respond, we have these
     // 6 statements set as

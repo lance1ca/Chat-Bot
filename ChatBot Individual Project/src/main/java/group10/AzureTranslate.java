@@ -20,7 +20,6 @@ import com.google.gson.*;
 import okhttp3.*;
 
 public class AzureTranslate {
-    
 
     // Defining public and private static variables to be used later:
 
@@ -46,7 +45,7 @@ public class AzureTranslate {
     // our text to so the user will understand the text in their language of choice
     public static String targetLanguage;
 
-    //String array for the parsed JSON data to retrieve the text from
+    // String array for the parsed JSON data to retrieve the text from
     public static String[] parseJSONText;
 
     // -------------------------------------------------------------------------------------------------------------------------------
@@ -99,9 +98,10 @@ public class AzureTranslate {
              * }
              * ]
              */
-           parseJSONText = translatedInput.split("\\\"text\": \"|\\\",");
+            parseJSONText = translatedInput.split("\\\"text\": \"|\\\",");
 
-           // we set translatedInput to be this parsed json text at index 1 (where the text is in this string
+            // we set translatedInput to be this parsed json text at index 1 (where the text
+            // is in this string
             // array)
             translatedInput = parseJSONText[1];
 
@@ -111,18 +111,17 @@ public class AzureTranslate {
             return input;
 
             /*
-            {
-  "error": {
-    "code": 400000,
-    "message": "One of the request inputs is not valid."
-  }
-}
-            */
+             * {
+             * "error": {
+             * "code": 400000,
+             * "message": "One of the request inputs is not valid."
+             * }
+             * }
+             */
         }
         // return the translated input
         return translatedInput;
 
-         
     }
 
     // -------------------------------------------------------------------------------------------------------------------------------
@@ -155,7 +154,8 @@ public class AzureTranslate {
             // It splits it at "text": and also at ",
             parseJSONText = translatedInput.split("\\\"text\": \"|\\\",");
 
-           // we set translatedInput to be this parsed json text at index 1 (where the text is in this string
+            // we set translatedInput to be this parsed json text at index 1 (where the text
+            // is in this string
             // array)
             translatedInput = parseJSONText[1];
             // if an error, we catch the exception
@@ -166,11 +166,10 @@ public class AzureTranslate {
         // return the translated input
         return translatedInput;
 
-        
     }
 
     // -------------------------------------------------------------------------------------------------------------------------------
-    // Microsoft Azure METHOD #2 **FINISHED**
+    // Microsoft Azure METHOD #3 **FINISHED**
     // This method takes in a string input and sets the user text to be this input
     // Then this method makes an attempt to detect which language is being spoken
     // from the user and then sets the target language to be this
@@ -204,10 +203,7 @@ public class AzureTranslate {
         } catch (Exception e) {
             System.out.println(e);
         }
-        // // here we call the translate to english method to translate the text from the
-        // // target language to english for processing
-        // // and we return this value back to the user system
-        // return translateToEnglish(input);
+
     }
 
     // -------------------------------------------------------------------------------------------------------------------------------

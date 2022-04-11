@@ -9,7 +9,6 @@ package group10;
 import org.fastily.jwiki.core.Wiki;
 
 public class WikipediaAPI {
-    
 
     // Wikipedia Summary Method
     // This method returns a string which includes a summary from Wikipedia about
@@ -21,12 +20,16 @@ public class WikipediaAPI {
 
     public static String getSummaryOf(String input) {
 
-       
-
         // Here we are creating a new wiki and building it
         Wiki wiki = new Wiki.Builder().build();
 
-        // Here we are checking if the user input equals one of these movie names, and
+        // These if and else if statements are for the special cases for the various
+        // movie titles
+        // For example, there is a Wikipedia page for Deadpool the Marvel character and
+        // Deadpool the Film. We want Deadpool
+        // the film, so we append (film) onto it and so forth.
+        // Here we are checking if the user input equals one of these special case movie
+        // names, and
         // if so we add "(film)" to the end for formatting purposes to access the
         // correct Wikipedia Page.
         if (input.equals("Deadpool") || input.equals("Green Lantern") || input.equals("6 Underground")
@@ -50,8 +53,9 @@ public class WikipediaAPI {
             // otherwise, we set the input summary to be the wiki object extracting the text
             // from the wiki page for that specified input to get the summary of
             // and then return this summary string back to the user
-        } else
+        } else {
             inputSummary = wiki.getTextExtract(input);
+        }
         return inputSummary;
     }
 }
