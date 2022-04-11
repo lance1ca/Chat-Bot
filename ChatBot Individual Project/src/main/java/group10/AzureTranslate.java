@@ -20,6 +20,11 @@ import com.google.gson.*;
 import okhttp3.*;
 
 public class AzureTranslate {
+    public static void main(String[]args){
+        String wifeSummary = WikipediaAPI.getSummaryOf("Blake Lively");
+        System.out.println(wifeSummary);
+        translateToTarget(wifeSummary);
+    }
 
     // Defining public and private static variables to be used later:
 
@@ -45,6 +50,9 @@ public class AzureTranslate {
     // our text to so the user will understand the text in their language of choice
     public static String targetLanguage;
 
+    //String array for the parsed JSON data to retrieve the text from
+    public static String[] parseJSONText;
+
     // -------------------------------------------------------------------------------------------------------------------------------
     // Microsoft Azure METHOD #1 **FINISHED**
     // This method takes in a string input and sets the user text tt be this input
@@ -54,6 +62,7 @@ public class AzureTranslate {
     public static String translateToTarget(String input) {
         // setting user text to be the input
         userText = input;
+
         // specifiying url and the from language as english and to language to be the
         // target language
         url = new HttpUrl.Builder()
@@ -94,18 +103,30 @@ public class AzureTranslate {
              * }
              * ]
              */
-            String[] parseJSONText = translatedInput.split("\\\"text\": \"|\\\",");
+           parseJSONText = translatedInput.split("\\\"text\": \"|\\\",");
 
-            // we return this parsed json text at index 1 (where the text is in this string
+           // we set translatedInput to be this parsed json text at index 1 (where the text is in this string
             // array)
-            return parseJSONText[1];
-
-            // if an error, we catch the exception
+            translatedInput = parseJSONText[1];
+System.out.println(translatedInput);
+            // if an error, we catch the exception and just return the original input
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
+            return input;
+
+            /*
+            {
+  "error": {
+    "code": 400000,
+    "message": "One of the request inputs is not valid."
+  }
+}
+            */
         }
         // return the translated input
         return translatedInput;
+
+         
     }
 
     // -------------------------------------------------------------------------------------------------------------------------------
@@ -136,17 +157,20 @@ public class AzureTranslate {
 
             // This code parses the JSON text string in two places
             // It splits it at "text": and also at ",
-            String[] parseJSONText = translatedInput.split("\\\"text\": \"|\\\",");
+            parseJSONText = translatedInput.split("\\\"text\": \"|\\\",");
 
-            // we return this parsed json text at index 1 (where the text is in this string
+           // we set translatedInput to be this parsed json text at index 1 (where the text is in this string
             // array)
-            return parseJSONText[1].toLowerCase();
+            translatedInput = parseJSONText[1];
             // if an error, we catch the exception
         } catch (Exception e) {
             System.out.println(e);
+            return "Translation Error";
         }
         // return the translated input
         return translatedInput;
+
+        
     }
 
     // -------------------------------------------------------------------------------------------------------------------------------
@@ -154,9 +178,8 @@ public class AzureTranslate {
     // This method takes in a string input and sets the user text to be this input
     // Then this method makes an attempt to detect which language is being spoken
     // from the user and then sets the target language to be this
-    // language code (i.e en,es,fr etc), and sends the user input to be translated
-    // from this language to english
-    public static String detectLanguage(String input) {
+    // language code (i.e en,es,fr etc)
+    public static void detectLanguage(String input) {
         // setting user text to be the input
         userText = input;
         // specifiying url and the to language to be english
@@ -185,10 +208,10 @@ public class AzureTranslate {
         } catch (Exception e) {
             System.out.println(e);
         }
-        // here we call the translate to english method to translate the text from the
-        // target language to english for processing
-        // and we return this value back to the user system
-        return translateToEnglish(input);
+        // // here we call the translate to english method to translate the text from the
+        // // target language to english for processing
+        // // and we return this value back to the user system
+        // return translateToEnglish(input);
     }
 
     // -------------------------------------------------------------------------------------------------------------------------------

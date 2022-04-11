@@ -9,6 +9,7 @@ package group10;
 import org.fastily.jwiki.core.Wiki;
 
 public class WikipediaAPI {
+    
 
     // Wikipedia Summary Method
     // This method returns a string which includes a summary from Wikipedia about
@@ -19,6 +20,8 @@ public class WikipediaAPI {
     // to the user
 
     public static String getSummaryOf(String input) {
+
+       
 
         // Here we are creating a new wiki and building it
         Wiki wiki = new Wiki.Builder().build();

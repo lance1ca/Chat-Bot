@@ -1,3 +1,46 @@
+//FINAL INDIVIDUAL PROJECT DEMONSTRATION
+//COSC 310
+//By: LANCE ROGAN, 62708938 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //FINAL INDIVIDUAL PROJECT
 //COSC 310 Chat Bot Class **FINISHED**
 //By: LANCE ROGAN, 62708938 
@@ -34,6 +77,8 @@ public class ChatBot extends JFrame implements ActionListener {
   static boolean askAQuestion = false;
   // boolean for start up statements
   static boolean startUp = true;
+  //boolean to keep track if the text was translated
+  public static boolean textWasTranslated;
   // strings to track user inputs
   static String userInput;
   static String userInputUnformatted;
@@ -531,15 +576,25 @@ public class ChatBot extends JFrame implements ActionListener {
         userInputUnformatted = chatField.getText();
         userInput = chatField.getText().toLowerCase();
 
+
+        //Using the AzureTranslate API
         // here we try to detect the users language being spoken to the bot, and we then
         // send this text to be
         // translated from the language being spoken into english for processing
         // responses etc
         try {
           // here we detect which language the user is speaking to the bot (es,en,fr, etc)
-          // Then it automatically translates this specific language text to english to
-          // read in our system to determine our output
-          userInput = AzureTranslate.detectLanguage(userInput);
+          AzureTranslate.detectLanguage(userInput);
+System.out.println(AzureTranslate.targetLanguage);
+          // Here we use the API to automatically translate this user text from the specific language text to english to
+          // read in our system to determine our output.
+          //Note: we only translate if the language is not in english, otherwise we continue since its already in english
+          if(AzureTranslate.targetLanguage != "en"){
+            userInput = AzureTranslate.translateToEnglish(userInput).toLowerCase();
+            textWasTranslated = true;
+          }else{
+            textWasTranslated = true;
+          }
 
           // if an error occurs we display the error code
         } catch (Exception g) {
@@ -613,7 +668,7 @@ public class ChatBot extends JFrame implements ActionListener {
         // if the user input equals goodbye, then we append the goodbye message, delay
         // the program for 3 seconds, and then
         // end the program
-        if (userInput.equals(AzureTranslate.translateToTarget("goodbye"))) {
+        if (AzureTranslate.translateToTarget(userInput).contains("goodbye")) {
           // appending the goodbye message
           chatArea.append("Ryan Reynolds: "
               + AzureTranslate.translateToTarget("Goodbye! Nice meeting you! I am shutting down now.") + "\n");
@@ -1132,8 +1187,9 @@ public class ChatBot extends JFrame implements ActionListener {
       // information
       if (userInput.contains("about") || userInput.contains("summary") || userInput.contains("explain")) {
         // append the result of the Wikipedia API for his wife
+        String wifeSummary = WikipediaAPI.getSummaryOf("Blake Lively");
         chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Here is a little bit about my wife...")
-            + "\n" + AzureTranslate.translateToTarget(WikipediaAPI.getSummaryOf("Blake Lively")) + "\n");
+            + "\n" + AzureTranslate.translateToTarget(wifeSummary) + "\n");
 
         // return
         return;
@@ -1293,7 +1349,7 @@ public class ChatBot extends JFrame implements ActionListener {
       chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("How about you?") + "\n");
       userInputUnformatted = chatField.getText();
       chatField.setText("");
-      chatArea.append("You: " + AzureTranslate.translateToTarget(userInputUnformatted) + "\n");
+      chatArea.append(name+": " + AzureTranslate.translateToTarget(userInputUnformatted) + "\n");
       chatArea.append("Ryan Reynolds: " + AzureTranslate.translateToTarget("Really!") + "\n");
 
     } else {
