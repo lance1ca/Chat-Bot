@@ -12,7 +12,6 @@
  <img src="images/mainGUIExample.png" alt="gui" />
  <br>
  <h2>Video Demonstration</h2>
- <p>Note: The video size is approximately 51MB, and GitHub limits to 10MB videos. So that is why the video sections are split up</p>
  <br>
 
 
